@@ -1,13 +1,12 @@
-// DashboardHeader.js
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
 const DashboardHeader = () => {
   return (
     <View style={styles.header}>
-      {/* Placeholder for drawer handle, dashboard icon, and patient image. Use Image component */}
+      {}
       <Text style={styles.textWrapper}>Dashboard</Text>
-      {/* Assuming you have these images in your assets folder. Replace 'require' paths with actual paths to your images */}
+      {}
       
     </View>
   );
@@ -15,7 +14,7 @@ const DashboardHeader = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#A5C9CB', // Replace with the actual color for --variable-collection-teal
+    backgroundColor: '#A5C9CB',
     borderRadius: 10,
     height: 143,
     width: 430,
@@ -41,8 +40,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     position: 'absolute',
-    top: 64,
-    left: 107,
+    top: 80,
+    left: 90,
     textAlign: 'center',
     width: 218,
   },

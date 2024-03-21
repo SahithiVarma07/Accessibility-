@@ -1,22 +1,39 @@
-// App.js or any other parent component
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import DashboardHeader from './components/DashboardHeader'; 
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import * as Font from 'expo-font';
+import Dashboard from './screens/Dashboard'; 
+
+// Function to load fonts
+async function loadFonts() {
+  await Font.loadAsync({
+    'Inter': require('./assets/Inter-VariableFont_slnt,wght.ttf'), 
+  });
+}
 
 export default function App() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    loadFonts().then(() => setFontsLoaded(true));
+  }, []);
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <DashboardHeader />
-      {/* Other components */}
-    </View>
+    <Dashboard />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
