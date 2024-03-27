@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TextInput } from 'react-native';
 import DashboardHeader from '../components/DashboardHeader'; 
 import PatientButton from '../components/PatientButton'; 
+import { useNavigation } from '@react-navigation/native';
 
 const Dashboard = () => {
+  const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
   
   // patient names
@@ -18,6 +20,7 @@ const Dashboard = () => {
   // patient button press
   const onPatientPress = (patientName) => {
     console.log('Pressed:', patientName);
+    navigation.navigate('PatientProfile', { patientName });
   };
 
   // search bar functionality

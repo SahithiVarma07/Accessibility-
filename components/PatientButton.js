@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   topSection: {
     flex: 1, 
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#A7CFD2',
   },
   bottomSection: {
     height: 40, 
