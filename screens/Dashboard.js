@@ -8,7 +8,7 @@ const Dashboard = () => {
   
   // patient names
   const patients = [
-    'Patient Name 0',
+    'Patient Name 1',
     'Patient Name 2',
     'Patient Name 3',
     'Patient Name 4',
