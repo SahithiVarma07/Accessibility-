@@ -17,6 +17,11 @@ const Dashboard = () => {
     'Patient Name 5',
   ];
 
+  // filtered patients based on search query
+  const filteredPatients = patients.filter(patient =>
+    patient.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   // patient button press
   const onPatientPress = (patientName) => {
     console.log('Pressed:', patientName);
@@ -38,7 +43,7 @@ const Dashboard = () => {
         onChangeText={handleSearch}
       />
       <ScrollView contentContainerStyle={styles.patientsContainer}>
-        {patients.map((patientName, index) => (
+        {filteredPatients.map((patientName, index) => (
           <PatientButton
             key={index}
             patientName={patientName}
