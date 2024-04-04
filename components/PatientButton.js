@@ -14,12 +14,12 @@ const PatientButton = ({ onPress, patientName }) => {
 
 const styles = StyleSheet.create({
   button: {
-    //borderWidth: 1,
     borderColor: '#000',
     borderRadius: 12,
     overflow: 'hidden',
-    margin: '2%',
-    width: '46%',
+    
+    margin: '3%',
+    width: '42%',
     height: 120,
     backgroundColor: '#fff',
   },
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    left: 10,
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 
