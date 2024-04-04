@@ -4,10 +4,19 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 const DashboardHeader = () => {
   return (
     <View style={styles.header}>
-      {}
-      <Text style={styles.textWrapper}>Dashboard</Text>
-      {}
+
+      <Image
+        source={require('../assets/hamburger.png')} // Replace with the actual path to your left icon
+        style={styles.leftIcon}
+      />
       
+      <Text style={styles.textWrapper}>Dashboard</Text>
+
+      <Image
+        source={require('../assets/user_icon.png')} // Replace with the actual path to your left icon
+        style={styles.rightIcon}
+      />
+
     </View>
   );
 };
@@ -17,40 +26,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#2f6be4',
     borderRadius: 10,
     height: 143,
-    width: 430,
+    width: 375,
     position: 'relative',
   },
-  drawerHandleStroke: {
-    height: 3,
+  leftIcon: {
     position: 'absolute',
-    top: 124,
-    left: 176,
-    width: 77,
+    left: 30,
+    top: 80, 
+    width: 35, 
+    height: 35, 
   },
-  dashboardIcon: {
-    height: 61,
+  rightIcon: {
     position: 'absolute',
-    top: 56,
-    left: 26,
-    width: 61,
+    right: 30, 
+    top: 80, 
+    width: 35, 
+    height: 35, 
   },
   textWrapper: {
     color: '#fff',
-    fontFamily: 'Inter',
     fontSize: 32,
     fontWeight: 'bold',
-    position: 'absolute',
     top: 80,
-    left: 90,
     textAlign: 'center',
-    width: 218,
-  },
-  patientImageStroke: {
-    height: 61,
-    position: 'absolute',
-    top: 56,
-    left: 344,
-    width: 61,
   },
 });
 
