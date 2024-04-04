@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   screenBodyContent: {
     borderTopLeftRadius: 50,
     borderTopRightRadius: 40,
-    backgroundColor: '7CB3F3',
+    backgroundColor: '#7CB3F3',
     padding: 20,
     paddingTop: 35,
     // ... other styles
