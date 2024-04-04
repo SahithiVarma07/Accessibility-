@@ -14,7 +14,7 @@ const DashboardHeader = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#1E4D2B',
+    backgroundColor: '#2f6be4',
     borderRadius: 10,
     height: 143,
     width: 430,

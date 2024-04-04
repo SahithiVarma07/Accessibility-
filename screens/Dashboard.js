@@ -58,6 +58,7 @@ const Dashboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
   },
   searchBar: {
     height: 40,
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   patientsContainer: {
-    backgroundColor: '#E6F4EA',
+    //backgroundColor: '#ffffff',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
