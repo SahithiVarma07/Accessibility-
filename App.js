@@ -5,6 +5,7 @@ import Dashboard from './screens/Dashboard';
 import PatientProfile from './screens/PatientProfile'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Activity from './screens/Activity';
 
 // Function to load fonts
 async function loadFonts() {
@@ -34,6 +35,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="PatientProfile" component={PatientProfile} options={{ title: 'Patient Profile' }} />
+        <Stack.Screen name="Activity" component={Activity} />
       </Stack.Navigator>
     </NavigationContainer>
   );
