@@ -14,7 +14,7 @@ const DashboardHeader = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#A5C9CB',
+    backgroundColor: '#1E4D2B',
     borderRadius: 10,
     height: 143,
     width: 430,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: 61,
   },
   textWrapper: {
-    color: '#000000',
+    color: '#fff',
     fontFamily: 'Inter',
     fontSize: 32,
     fontWeight: 'bold',

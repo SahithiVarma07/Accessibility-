@@ -14,9 +14,9 @@ const PatientButton = ({ onPress, patientName }) => {
 
 const styles = StyleSheet.create({
   button: {
-    borderWidth: 1,
+    //borderWidth: 1,
     borderColor: '#000',
-    borderRadius: 8,
+    borderRadius: 12,
     overflow: 'hidden',
     margin: '2%',
     width: '46%',
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   topSection: {
     flex: 1, 
-    backgroundColor: '#A7CFD2',
+    backgroundColor: '#b3d4c0',
   },
   bottomSection: {
     height: 40, 
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 

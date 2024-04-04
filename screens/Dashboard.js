@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   patientsContainer: {
+    backgroundColor: '#E6F4EA',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
