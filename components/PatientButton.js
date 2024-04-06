@@ -17,9 +17,8 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderRadius: 12,
     overflow: 'hidden',
-    
-    margin: '3%',
-    width: '42%',
+    margin: '2%',
+    width: '46%',
     height: 120,
     backgroundColor: '#fff',
   },
@@ -33,9 +32,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    left: 10,
-    fontSize: 16,
-    fontWeight: '600',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 
