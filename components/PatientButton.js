@@ -14,7 +14,6 @@ const PatientButton = ({ onPress, patientName }) => {
 
 const styles = StyleSheet.create({
   button: {
-    //borderWidth: 1,
     borderColor: '#000',
     borderRadius: 12,
     overflow: 'hidden',

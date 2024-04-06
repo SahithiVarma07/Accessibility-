@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import Dashboard from './screens/Dashboard'; 
 import PatientProfile from './screens/PatientProfile'
+import EditInfo from './screens/EditInfo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -34,6 +35,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="PatientProfile" component={PatientProfile} options={{ title: 'Patient Profile' }} />
+        <Stack.Screen name="EditInfo" component={EditInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

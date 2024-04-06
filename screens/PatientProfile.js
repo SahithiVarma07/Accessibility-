@@ -1,33 +1,50 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import NavBar from '../components/NavBar';
+import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+
+
 
 const PatientProfile = () => {
+  const navigation = useNavigation();
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons name="md-checkmark-circle" size={32} color="green" />
-        <Text style={styles.headerTitle}>Dashboard</Text>
-        <Ionicons name="md-checkmark-circle" size={32} color="green" />
-      </View>
-      <View style={styles.screenBodyContent}>
-        <View style={styles.overlapGroup}>
-          <View style={styles.handleBar} />
-          <Text style={styles.pageTitle}>Patient Profile</Text>
+    <View style={styles.fullScreenContainer}>
+      <ScrollView style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+            <Ionicons name="home" size={32} color="white" />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Patient Name</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('EditInfo')}>
+            <FontAwesome name="user-circle-o" size={32} color="white" />
+            </TouchableOpacity>
         </View>
-        <Text style={styles.dateHeader}>Thursday, February 29</Text>
-        {/* Activity List */}
-        <View style={styles.activityItem}>
-          <Text style={styles.activityTitle}>Activity Title</Text>
-          <Text style={styles.activityTime}>00:00 PM - 00:00 PM</Text>
+        <View style={styles.screenBodyContent}>
+          <View style={styles.overlapGroup}>
+            <View style={styles.handleBar} />
+            <Text style={styles.pageTitle}>Patient Profile</Text>
+          </View>
+          <Text style={styles.dateHeader}>Thursday, February 29</Text>
+          {/* Activity List */}
+          <View style={styles.activityItem}>
+            <Text style={styles.activityTitle}>Activity Title</Text>
+            <Text style={styles.activityTime}>00:00 PM - 00:00 PM</Text>
+          </View>
         </View>
-        {/* Repeat Activity Item for each activity */}
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <NavBar navigation={navigation} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  fullScreenContainer: {
+    flex: 1,
+    justifyContent: 'space-between', 
+  },
+
   container: {
     flex: 1,
     backgroundColor: '#E6F4EA',
@@ -36,11 +53,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#2f6be4',
     borderRadius: 10,
     height: 143,
-    width: 430,
-    position: 'relative',
+    width: Dimensions.get('window').width,
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    paddingHorizontal: 10,
+    borderRadius: 0,
   },
   headerTitle: {
-    fontSize: 100,
+    fontSize: 35,
     color: 'white',
   },
   screenBodyContent: {
@@ -49,10 +70,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     paddingTop: 35,
-    // ... other styles
-  },
-  overlapGroup: {
-    // ... styles for the overlap group
+    marginTop: -20, 
+    zIndex: 0,
   },
   handleBar: {
     alignSelf: 'center',
@@ -66,7 +85,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    // ... other styles
   },
   dateHeader: {
     fontSize: 16,
@@ -78,7 +96,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     marginBottom: 10,
-    // ... other styles
   },
   activityTitle: {
     fontSize: 18,
