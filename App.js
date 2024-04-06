@@ -6,6 +6,7 @@ import PatientProfile from './screens/PatientProfile'
 import EditInfo from './screens/EditInfo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Activity from './screens/Activity';
 
 // Function to load fonts
 async function loadFonts() {

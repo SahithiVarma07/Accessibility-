@@ -63,11 +63,13 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 35,
     color: 'white',
+    marginLeft: 10,
+    marginRight: 10,
   },
   screenBodyContent: {
-    borderTopLeftRadius: 40,
+    borderTopLeftRadius: 50,
     borderTopRightRadius: 40,
-    backgroundColor: 'white',
+    backgroundColor: '#7CB3F3',
     padding: 20,
     paddingTop: 35,
     marginTop: -20, 
@@ -91,8 +93,11 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 10,
   },
+  activityContainer: {
+    marginBottom: 10,
+  },
   activityItem: {
-    backgroundColor: '#E6F4EA',
+    backgroundColor: '#',
     borderRadius: 10,
     padding: 15,
     marginBottom: 10,
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
   },
   activityTime: {
     fontSize: 14,
-    color: '#666',
+    color: 'gray',
   },
 });
 
