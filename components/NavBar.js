@@ -11,7 +11,7 @@ const NavBar = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Calls')}>
         <Ionicons name="call" size={30} color="#88b3ee" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Analytics')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Mood')}>
         <FontAwesome5 name="chart-line" size={30} color="#88b3ee" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Info')}>
