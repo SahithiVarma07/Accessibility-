@@ -75,6 +75,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     borderRadius: 45,
     //backgroundColor: '#000',
+
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
   },
   handleBar: {
     alignSelf: 'center',
