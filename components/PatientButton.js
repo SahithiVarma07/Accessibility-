@@ -17,8 +17,9 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderRadius: 12,
     overflow: 'hidden',
-    margin: '2%',
-    width: '46%',
+    
+    margin: '3%',
+    width: '42%',
     height: 120,
     backgroundColor: '#fff',
   },
@@ -30,10 +31,19 @@ const styles = StyleSheet.create({
     height: 40, 
     backgroundColor: '#fff',
     justifyContent: 'center',
+
+    // shadowColor: 'black',
+    // shadowOffset: {
+    //     height: ,
+    // },
+    // shadowOpacity: 0.4,
+    // shadowRadius: 6,
+
   },
   text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    left: 10,
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 
