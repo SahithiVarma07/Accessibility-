@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import NavBar from '../components/NavBar'; // If you want to include NavBar
+import NavBar from '../components/NavBar';
 import { useNavigation } from '@react-navigation/native';
 
 const MoodTracker = () => {
   const navigation = useNavigation();
+  const [selectedMood, setSelectedMood] = useState(null);
   const moods = [
     '😄', '🙂', '😐', '😕', '😠', '🤢'
   ];
 
   const onMoodPress = (mood) => {
+    setSelectedMood(mood); 
     console.log('Selected Mood:', mood);
   };
 
@@ -33,15 +35,20 @@ const MoodTracker = () => {
             {moods.map((mood, index) => (
               <TouchableOpacity
                 key={index}
-                style={styles.moodButton}
+                style={[
+                  styles.moodButton,
+                  selectedMood === mood && styles.selectedMoodButton 
+                ]}
                 onPress={() => onMoodPress(mood)}
               >
                 <Text style={styles.moodText}>{mood}</Text>
               </TouchableOpacity>
             ))}
           </View>
+          {selectedMood && (
+            <Text style={styles.selectedMoodText}>Selected Mood: {selectedMood}</Text>
+          )}
           <Text style={styles.statsTitle}>Stats</Text>
-          {/* Additional stats components would go here */}
         </View>
       </ScrollView>
       <NavBar navigation={navigation} />
@@ -88,17 +95,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   moodButton: {
-    backgroundColor: '#2f6be4',
+    backgroundColor: '#7CB3F3',
     borderRadius: 20,
     padding: 20,
     margin: 10,
-    width: '40%', // Adjust the width as per your layout requirement
+    width: '30%',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  selectedMoodButton: {
+    backgroundColor: '#2f6be4',
+  },
   moodText: {
     fontSize: 30,
-    // Adjust your mood text styles if necessary
   },
   title: {
     fontSize: 24,
@@ -112,12 +121,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
+  selectedMoodText: {
+    fontSize: 18,
+    color: '#2f6be4',
+    textAlign: 'center',
+    marginTop: 20,
+  },
   statsTitle: {
     fontSize: 24,
     textAlign: 'center',
     marginTop: 40,
   },
-  // ... any other styles you may need
 });
 
 export default MoodTracker;
