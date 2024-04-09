@@ -19,7 +19,7 @@ const PatientProfile = () => {
           <Text style={styles.headerTitle}>Patient Name</Text>
           <TouchableOpacity onPress={() => navigation.navigate('EditInfo')}>
             <FontAwesome name="user-circle-o" size={32} color="white" />
-            </TouchableOpacity>
+          </TouchableOpacity>
         </View>
         <View style={styles.screenBodyContent}>
           <View style={styles.overlapGroup}>
@@ -28,10 +28,10 @@ const PatientProfile = () => {
           </View>
           <Text style={styles.dateHeader}>Thursday, February 29</Text>
           {/* Activity List */}
-          <View style={styles.activityItem}>
+          <TouchableOpacity style={styles.activityItem} onPress={() => navigation.navigate('Activity')}>
             <Text style={styles.activityTitle}>Activity Title</Text>
             <Text style={styles.activityTime}>00:00 PM - 00:00 PM</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <NavBar navigation={navigation} />
