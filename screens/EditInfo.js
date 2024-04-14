@@ -1,33 +1,46 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import PatientHeader from '../components/PatientHeader'; 
+import { usePatients } from '../PatientsContext';
+import NavBar from '../components/NavBar';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const EditInfo = () => {
+  const { patients } = usePatients(); // Access the patients array from context
+  const route = useRoute();
+  const navigation = useNavigation();
+  const { patientName } = route.params;
+
+  // Find the patient in the patients array
+  const patient = patients.find(p => p.name === patientName);
+
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Ionicons name="menu" size={32} color="white" />
-        <Text style={styles.headerTitle}>Dashboard</Text>
-        <Ionicons name="search" size={32} color="white" />
-      </View>
+      <PatientHeader patientName={patient.name} leftIconName="grid" rightIconName="person-circle-outline" />
 
       {/* Scrollable Body Content */}
-      <ScrollView style={styles.scrollableContent} showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.scrollableContent} showsVerticalScrollIndicator={true}>
         <View style={styles.handleBar} />
         <View style={styles.bodyContent}>
-          <Text style={styles.title}>Edit Patient Information</Text>
+          <Text style={styles.title}>Edit Patient Info</Text>
         </View>
         <View style={styles.infoContainer}>
-        <View style={styles.imagePlaceholder} />
-        <View style={styles.textContainer}>
-        <Text style={styles.patientNameText}>Patient Name</Text>
-        <Text style={styles.infoText}>Secondary Info</Text>
-        <Text style={styles.infoText}>Secondary Info</Text>
-        <Text style={styles.infoText}>Secondary Info</Text>
-      </View>
-    </View>
+          {/* Display the image if patient is found and has an image */}
+          {patient && patient.image && (
+            <Image source={patient.image} style={styles.imagePlaceholder} />
+          )}
+
+          <View style={styles.textContainer}>
+            <Text style={styles.patientNameText}>{ patient.name }</Text>
+            <Text style={styles.infoText}>Age: { patient.age }</Text>
+            <Text style={styles.infoText}>D.O.B: { patient.dob }</Text>
+            <Text style={styles.infoText}>Hometown: { patient.hometown }</Text>
+            <Text style={styles.infoText}>Family: { patient.family }</Text>
+          </View>
+        </View>
       </ScrollView>
+      <NavBar navigation={navigation} />
     </View>
   );
 };
@@ -35,22 +48,7 @@ const EditInfo = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E6F4EA', 
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#2f6be4',
-    paddingTop: 50, 
-    paddingHorizontal: 15,
-    paddingBottom: 20, 
-  },
-  headerTitle: {
-    fontSize: 35,
-    color: 'white',
-    flex: 1,
-    textAlign: 'center',
+    backgroundColor: '#2f6be4', 
   },
   scrollableContent: {
     flex: 1,
@@ -58,26 +56,25 @@ const styles = StyleSheet.create({
   },
   handleBar: {
     alignSelf: 'center',
-    width: 40,
-    height: 5, 
-    backgroundColor: '#D0D0D0',
-    borderRadius: 2.5, 
-    marginVertical: 8, 
+    width: 77,
+    height: 3,
+    backgroundColor: '#949494',
+    borderRadius: 3,
   },
   bodyContent: {
-    padding: 20,
     paddingBottom: 60, 
+    marginLeft: 18,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontSize: 30,
+    // fontWeight: 'bold',
+    marginTop: 20,
   },
   infoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: -40,
-    marginLeft: 20, 
+    marginLeft: 14, 
     marginBottom: 20,
   },
   imagePlaceholder: {
@@ -87,18 +84,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#7CB3F3',
   },
   textContainer: {
-    marginLeft: 20, 
+    marginLeft: 14, 
   },
   patientNameText: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold', 
     color: '#000000',
-    marginBottom: 4, 
+    marginBottom: 10, 
   },
   infoText: {
-    fontSize: 18,
-    color: '#000000',
-    marginBottom: 4, 
+    fontSize: 15,
+    color: '#858585',
+    marginBottom: 8, 
   },
 });
 

@@ -10,17 +10,16 @@ const Dashboard = () => {
   
   // patient names
   const patients = [
-    'Patient Name 1',
-    'Patient Name 2',
-    'Patient Name 3',
-    'Patient Name 4',
-    'Patient Name 5',
-    //'Patient Name 6',
+    { name: 'Agnes Young', image: require('../assets/patient_images/patient1.jpeg') },
+    { name: 'Dorren Johnson', image: require('../assets/patient_images/patient2.jpeg') },
+    { name: 'Harvey Walker', image: require('../assets/patient_images/patient3.jpeg') },
+    { name: 'Alaina Garcia', image: require('../assets/patient_images/patient4.jpeg') },
+    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
   ];
 
   // filtered patients based on search query
   const filteredPatients = patients.filter(patient =>
-    patient.toLowerCase().includes(searchQuery.toLowerCase())
+    patient.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // patient button press
@@ -49,13 +48,14 @@ const Dashboard = () => {
             />
           </View>
           <View style={styles.patientButtonContainer}>
-            {filteredPatients.map((patientName, index) => (
-              <PatientButton
-                key={index}
-                patientName={patientName}
-                onPress={() => onPatientPress(patientName)}
-              />
-            ))}
+          {filteredPatients.map((patient, index) => (
+            <PatientButton
+              key={index}
+              patientName={patient.name}
+              image={patient.image}
+              onPress={() => onPatientPress(patient.name)}
+            />
+          ))}
           </View>
         </ScrollView>
       </View>

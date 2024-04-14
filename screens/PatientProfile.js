@@ -51,7 +51,7 @@ const PatientProfile = () => {
 
   return (
     <View style={styles.fullScreenContainer}>
-      <PatientHeader patientName={patientName} navigation={navigation} leftIconName={ "grid" } rightIconName={"user-circle-o"} />
+      <PatientHeader patientName={patientName} leftIconName={ "grid" } rightIconName={"person-circle-outline"} />
      
       <View style={styles.activityContainer}>
 
@@ -96,11 +96,16 @@ const styles = StyleSheet.create({
   fullScreenContainer: {
     flex: 1,
     //justifyContent: 'space-between',
+    backgroundColor: '#2f6be4',
   },
 
   activityContainer: {
     flex: 1,
-    backgroundColor: '#2f6be4',
+    borderRadius: 40,
+
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
   },
   handleBar: {
     alignSelf: 'center',

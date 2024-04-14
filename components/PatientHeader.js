@@ -3,7 +3,8 @@ import { Ionicons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-const PatientHeader = ( { patientName, navigation, leftIconName, rightIconName } ) => {
+const PatientHeader = ( { patientName, leftIconName, rightIconName } ) => {
+  const navigation = useNavigation();
 
   return (
     <View style={styles.headerContainer}>
@@ -14,8 +15,8 @@ const PatientHeader = ( { patientName, navigation, leftIconName, rightIconName }
 
       <Text style={styles.headerTitle}> { patientName } </Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate('EditInfo')}>
-        <FontAwesome style={styles.rightIcon} name= { rightIconName } size={32} color="white" />
+      <TouchableOpacity onPress={() => navigation.navigate('EditInfo', { patientName })}>
+        <Ionicons style={styles.rightIcon} name= { rightIconName } size={40} color="white" />
       </TouchableOpacity>
 
     </View>

@@ -8,6 +8,7 @@ import Mood from './screens/Mood';
 import Activity from './screens/Activity';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { PatientsProvider } from './PatientsContext'; 
 
 // Function to load fonts
 async function loadFonts() {
@@ -33,15 +34,17 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="PatientProfile" component={PatientProfile} options={{ title: 'Patient Profile' }} />
-        <Stack.Screen name="EditInfo" component={EditInfo} />
-        <Stack.Screen name="Mood" component={Mood} />
-        <Stack.Screen name="Activity" component={Activity} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PatientsProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="PatientProfile" component={PatientProfile} options={{ title: 'Patient Profile' }} />
+          <Stack.Screen name="EditInfo" component={EditInfo} />
+          <Stack.Screen name="Mood" component={Mood} />
+          <Stack.Screen name="Activity" component={Activity} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PatientsProvider>
   );
 }
 
