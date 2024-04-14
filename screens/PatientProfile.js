@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { Ionicons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import PatientHeader from '../components/PatientHeader'; 
 import NavBar from '../components/NavBar';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const PatientProfile = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { patientName } = route.params;
 
   // dummy data - backend data pending
   const activitiesGroupedByDate = {
@@ -47,17 +51,12 @@ const PatientProfile = () => {
 
   return (
     <View style={styles.fullScreenContainer}>
-      <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="arrow-back" size={32} color="white" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Patient Name</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('EditInfo')}>
-            <FontAwesome name="user-circle-o" size={32} color="white" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.screenBodyContent}>
+      <PatientHeader patientName={patientName} navigation={navigation} leftIconName={ "grid" } rightIconName={"user-circle-o"} />
+     
+      <View style={styles.activityContainer}>
+
+        <ScrollView style={styles.screenBodyContent}>
+          <View style={styles.handleBar} />
           <Text style={styles.scheduleTitle}>Patient's Schedule</Text>
           {/* iterates through date groups & activities */}
           {Object.entries(activitiesGroupedByDate).map(([date, activities], index, array) => (
@@ -80,52 +79,47 @@ const PatientProfile = () => {
               </TouchableOpacity>
             ))}
           </View>
-        ))}
-        </View>
-      </ScrollView>
+          ))}
+        </ScrollView>
+      </View>
+      
       <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate('Activity')}>
         <MaterialIcons name="add" size={40} color="white" />
       </TouchableOpacity>
+      
       <NavBar navigation={navigation} />
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   fullScreenContainer: {
     flex: 1,
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
   },
-  container: {
+
+  activityContainer: {
     flex: 1,
-  },
-  header: {
     backgroundColor: '#2f6be4',
-    height: 143,
-    width: Dimensions.get('window').width,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 10,
   },
-  headerTitle: {
-    fontSize: 22,
-    color: 'white',
-    fontWeight: 'bold',
+  handleBar: {
+    alignSelf: 'center',
+    width: 77,
+    height: 3,
+    backgroundColor: '#949494',
+    borderRadius: 3,
   },
-  patientName: {
-    fontSize: 28,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: -30,
-  },
+
   screenBodyContent: {
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
+
     backgroundColor: 'white',
+
     paddingVertical: 20,
     paddingHorizontal: 15,
-    marginTop: -30,
+    marginTop: -3,
+
     zIndex: 0,
   },
   scheduleTitle: {
