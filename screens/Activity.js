@@ -1,10 +1,12 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import React from 'react';
 import { View, Text } from 'react-native';
 =======
-
+=======
 >>>>>>> Stashed changes
+
 
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
@@ -94,10 +96,6 @@ const Activity = () => {
   };
 
   return (
-<<<<<<< Updated upstream
-    <View>
-      <Text>Activity Screen</Text>
-=======
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.activityScrollContainer}>
         {posts.map((item, index) => (
@@ -107,13 +105,11 @@ const Activity = () => {
       <TouchableOpacity style={styles.cameraButton} onPress={openCamera}>
         <FontAwesome name="camera" size={24} color="white" />
       </TouchableOpacity>
->>>>>>> Stashed changes
     </View>
   );
 };
 
-<<<<<<< Updated upstream
-=======
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -199,6 +195,7 @@ const styles = StyleSheet.create({
   },
 });
 
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
     shadowColor: 'black', // Same as patientContainer in Dashboard
@@ -208,6 +205,8 @@ const styles = StyleSheet.create({
 });
 
 
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 export default Activity;
 
