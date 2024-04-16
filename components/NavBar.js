@@ -1,44 +1,50 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { Ionicons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons, FontAwesome6 } from '@expo/vector-icons';
 
-const NavBar = ({ navigation }) => {
+const NavBar = ({ navigation, patientName, specialIcon }) => {
+  // Default color setup
+  const defaultColor = "#88b3ee"; // blue
+  const specialColor = "#056EEC"; // dark blue
+
+  // Function to determine the color of an icon based on its name
+  const getIconColor = (iconName) => {
+    return iconName === specialIcon ? specialColor : defaultColor;
+  };
+
   return (
     <View style={styles.navbarContainer}>
-      <TouchableOpacity onPress={() => navigation.navigate('Appointments')}>
-        <Ionicons name="calendar" size={40} color="#88b3ee" />
+      <TouchableOpacity onPress={() => navigation.navigate('PatientProfile', { patientName })}>
+        <FontAwesome6 name="house" size={40} color={getIconColor('house')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Calls')}>
-        <Ionicons name="call" size={40} color="#88b3ee" />
+        <Ionicons name="calendar" size={40} color={getIconColor('calendar')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Mood')}>
-        <FontAwesome5 name="chart-line" size={40} color="#88b3ee" />
+      <TouchableOpacity onPress={() => navigation.navigate('Mood', { patientName })}>
+        <FontAwesome6 name="chart-line" size={40} color={getIconColor('chart-line')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Info')}>
-        <FontAwesome name="info-circle" size={40} color="#88b3ee" />
+      <TouchableOpacity onPress={() => navigation.navigate('EditInfo', { patientName })}>
+        <Ionicons name="person-sharp" size={40} color={getIconColor('person-sharp')} />
       </TouchableOpacity>
     </View>
   );
 };
-
-const screenWidth = Dimensions.get('window').width;
-//const navbarHeight = 80;
 
 const styles = StyleSheet.create({
   navbarContainer: {
     position: 'absolute',
     bottom: 0,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: screenWidth,
+
+    width: '100%',
     height: '12%',
 
     backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
 
-    //shadowOffset: { width: 0, height: -2 }, 
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 4,

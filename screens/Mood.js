@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import NavBar from '../components/NavBar';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import PatientHeader from '../components/PatientHeader'; 
 
-const MoodTracker = () => {
+const Mood = ( ) => {
   const navigation = useNavigation();
   const [selectedMood, setSelectedMood] = useState(null);
   const moods = [
     '😄', '🙂', '😐', '😕', '😠', '🤢'
   ];
+
+  const route = useRoute();
+  const { patientName } = route.params;
 
   const onMoodPress = (mood) => {
     setSelectedMood(mood); 
@@ -18,16 +22,9 @@ const MoodTracker = () => {
 
   return (
     <View style={styles.fullScreenContainer}>
+      <PatientHeader patientName={patientName} leftIconName={ "grid" } rightIconName={"person-circle-outline"} />
+
       <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-            <Ionicons name="home" size={32} color="white" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Mood Tracker</Text>
-          <TouchableOpacity onPress={() => { /* Navigation or other action */ }}>
-            <FontAwesome name="user-circle-o" size={32} color="white" />
-          </TouchableOpacity>
-        </View>
         <View style={styles.screenBodyContent}>
           <View style={styles.handleBar} />
           <Text style={styles.title}>Today</Text>
@@ -51,7 +48,7 @@ const MoodTracker = () => {
           <Text style={styles.statsTitle}>Stats</Text>
         </View>
       </ScrollView>
-      <NavBar navigation={navigation} />
+      <NavBar navigation={navigation} patientName = {patientName} specialIcon="chart-line" />
     </View>
   );
 };
@@ -134,4 +131,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MoodTracker;
+export default Mood;

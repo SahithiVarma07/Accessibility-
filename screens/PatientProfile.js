@@ -87,7 +87,7 @@ const PatientProfile = () => {
         <MaterialIcons name="add" size={40} color="white" />
       </TouchableOpacity>
       
-      <NavBar navigation={navigation} />
+      <NavBar navigation={navigation} patientName={patientName} specialIcon="house" />
     </View>
   );
 };

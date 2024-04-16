@@ -40,7 +40,7 @@ const EditInfo = () => {
           </View>
         </View>
       </ScrollView>
-      <NavBar navigation={navigation} />
+      <NavBar navigation={navigation} patientName={patientName} specialIcon="person-sharp"/>
     </View>
   );
 };
