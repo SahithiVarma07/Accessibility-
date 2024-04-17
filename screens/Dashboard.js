@@ -15,6 +15,11 @@ const Dashboard = () => {
     { name: 'Harvey Walker', image: require('../assets/patient_images/patient3.jpeg') },
     { name: 'Alaina Garcia', image: require('../assets/patient_images/patient4.jpeg') },
     { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
+    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
+    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
+    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
+    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
+    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
   ];
 
   // filtered patients based on search query
@@ -36,28 +41,29 @@ const Dashboard = () => {
   return (
     <View style={styles.container}>
       <DashboardHeader />
-      <View style={styles.patientContainer}>
-        <View style={styles.handleBar} />
-        <ScrollView contentContainerStyle={styles.patientsScrollContainer}>
-          <View style={styles.searchBarContainer}>
-            <TextInput 
-              style={styles.searchBar}
-              placeholder="Search..."
-              value={searchQuery}
-              onChangeText={handleSearch}
-            />
-          </View>
-          <View style={styles.patientButtonContainer}>
-          {filteredPatients.map((patient, index) => (
-            <PatientButton
-              key={index}
-              patientName={patient.name}
-              image={patient.image}
-              onPress={() => onPatientPress(patient.name)}
-            />
-          ))}
-          </View>
-        </ScrollView>
+      <View style={styles.patientContainerShadow}>
+        <View style={styles.patientContainer}>
+          <ScrollView contentContainerStyle={styles.patientsScrollContainer}>
+            <View style={styles.searchBarContainer}>
+              <TextInput 
+                style={styles.searchBar}
+                placeholder="Search..."
+                value={searchQuery}
+                onChangeText={handleSearch}
+              />
+            </View>
+            <View style={styles.patientButtonContainer}>
+            {filteredPatients.map((patient, index) => (
+              <PatientButton
+                key={index}
+                patientName={patient.name}
+                image={patient.image}
+                onPress={() => onPatientPress(patient.name)}
+              />
+            ))}
+            </View>
+          </ScrollView>
+        </View>
       </View>
     </View>
   );
@@ -66,19 +72,21 @@ const Dashboard = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2f6be4',
-    //flex: 1,
-    //justifyContent: 'center',
-    //alignItems: 'center',
-    //width:375,
+    flex: 1,
   },
-  patientContainer: {
+  patientContainerShadow: {
     backgroundColor: '#f2f2f2',
     borderRadius: 45,
     //backgroundColor: '#000',
+    flex: 1,
 
     shadowColor: 'black',
     shadowOpacity: 0.4,
     shadowRadius: 6,
+  },
+  patientContainer: {
+    borderRadius: 45,
+    overflow: 'hidden',
   },
   handleBar: {
     alignSelf: 'center',
@@ -94,7 +102,7 @@ const styles = StyleSheet.create({
     width: 325,
     //marginHorizontal: 8,
     
-    //marginTop: 20,
+    marginTop: 40,
     marginBottom: 16,
 
     borderWidth: 1.2,
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     
-    height: '100%',
+    //height: '100%',
     justifyContent: 'center',
   },
   patientButtonContainer: {
@@ -116,6 +124,7 @@ const styles = StyleSheet.create({
     //alignItems: 'flex-start',
     //paddingHorizontal: 0,
     paddingLeft: 15,
+    marginBottom: 40,
   },
 });
 
