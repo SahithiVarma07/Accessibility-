@@ -9,6 +9,7 @@ import Activity from './screens/Activity';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PatientsProvider } from './PatientsContext'; 
+import Calls from './screens/Calls';
 
 // Function to load fonts
 async function loadFonts() {
@@ -42,6 +43,7 @@ export default function App() {
           <Stack.Screen name="EditInfo" component={EditInfo} />
           <Stack.Screen name="Mood" component={Mood} />
           <Stack.Screen name="Activity" component={Activity} />
+          <Stack.Screen name="Calls" component={Calls} />
         </Stack.Navigator>
       </NavigationContainer>
     </PatientsProvider>
