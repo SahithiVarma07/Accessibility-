@@ -1,57 +1,40 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import React from 'react';
-import { View, Text } from 'react-native';
-=======
-=======
->>>>>>> Stashed changes
 
-
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // import FontAwesome for the camera icon
-
-const Post = ({ photo, caption, activityName, dateTime }) => {
-  return (
-    <View style={styles.postContainer}>
-      <Text style={styles.activityName}>{activityName}</Text>
-      <Text style={styles.dateTime}>{dateTime}</Text>
-      <Image source={{ uri: photo }} style={styles.photo} />
-      <Text style={styles.caption}>{caption}</Text>
-    </View>
-=======
-
-import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; 
-import { Camera } from 'expo-camera'; 
+import { FontAwesome, AntDesign } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
-import LinearGradient from 'react-native-linear-gradient';
 
 const images = {
   'photo1.jpg': require('../assets/photo1.jpg'),
   'photo2.jpg': require('../assets/photo2.jpg'),
-  // add more images if needed
+  'photo3.jpg': require('../assets/photo3.jpg'), // Add more images if needed
 };
 
-const Post = ({ photo, caption, activityName, dateTime }) => {
+const Post = ({ photo, caption }) => {
+  const [liked, setLiked] = useState(false);
+
   return (
     <View style={styles.postContainer}>
-      <Text style={styles.activityName}>{activityName}</Text>
-      <Text style={styles.dateTime}>{dateTime}</Text>
-      <Image source={images[photo]} style={styles.photo} />
+      <View style={styles.imageContainer}>
+        <Image source={images[photo]} style={styles.photo} />
+        <TouchableOpacity style={styles.likeButton} onPress={() => setLiked(!liked)}>
+          <AntDesign name="heart" size={24} color={liked ? "red" : "gray"} />
+        </TouchableOpacity>
+      </View>
       <Text style={styles.caption}>{caption}</Text>
     </View>
   );
 };
 
 const Activity = () => {
-  // replace with your actual data
+  const [newPost, setNewPost] = useState(null);
+
   const posts = [
-    { photo: 'photo1.jpg', caption: 'Caption 1', activityName: 'Activity 1', dateTime: 'Date/Time 1' },
-    { photo: 'photo2.jpg', caption: 'Team time with the group!', activityName: 'Activity 2', dateTime: 'Date/Time 2' },
-  ];
+    { photo: 'photo1.jpg', caption: 'Caption 1' },
+    { photo: 'photo2.jpg', caption: 'Caption 2' },
+    { photo: 'photo3.jpg', caption: 'Caption 3' }, // Add more posts if needed
+    newPost,
+  ].filter(Boolean);
 
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -60,12 +43,12 @@ const Activity = () => {
     } else {
       let result = await ImagePicker.launchCameraAsync();
       if (!result.cancelled) {
-        // handle the captured image here
-        console.log(result.uri);
+        // Here you can ask the user for the caption and then set the new post
+        const caption = prompt('Enter a caption for the photo');
+        setNewPost({ photo: result.uri, caption });
       }
     }
   };
-  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,37 +58,9 @@ const Activity = () => {
         ))}
       </ScrollView>
       <TouchableOpacity style={styles.cameraButton} onPress={openCamera}>
-        <FontAwesome name="camera" size={24} color="white" />
+        <FontAwesome name="plus" size={30} color="white" />
       </TouchableOpacity>
     </SafeAreaView>
->>>>>>> Stashed changes
-  );
-};
-
-const Activity = () => {
-  // replace with your actual data
-  const posts = [
-    { photo: 'photo1.jpg', caption: 'Caption 1', activityName: 'Activity 1', dateTime: 'Date/Time 1' },
-    { photo: 'photo2.jpg', caption: 'Caption 2', activityName: 'Activity 2', dateTime: 'Date/Time 2' },
-    // ...
-  ];
-
-  const openCamera = () => {
-    // implement your camera opening functionality here
-    console.log('Open camera');
-  };
-
-  return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.activityScrollContainer}>
-        {posts.map((item, index) => (
-          <Post key={index} {...item} />
-        ))}
-      </ScrollView>
-      <TouchableOpacity style={styles.cameraButton} onPress={openCamera}>
-        <FontAwesome name="camera" size={24} color="white" />
-      </TouchableOpacity>
-    </View>
   );
 };
 
@@ -113,11 +68,7 @@ const Activity = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-<<<<<<< Updated upstream
-    backgroundColor: '#fff',
-=======
-    backgroundColor: '#2f6be4', // Same as Dashboard
->>>>>>> Stashed changes
+    backgroundColor: 'white',
     padding: 10,
   },
   activityScrollContainer: {
@@ -125,88 +76,52 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   postContainer: {
-<<<<<<< Updated upstream
-    backgroundColor: '#ADD8E6',
     borderRadius: 10,
-    padding: 10,
-    marginVertical: 10,
-=======
-    backgroundColor: '#f2f2f2', // Same as patientContainer in Dashboard
-    borderRadius: 45, // Same as patientContainer in Dashboard
-    padding: 20,
-    marginVertical: 10,
-    shadowColor: 'black', // Same as patientContainer in Dashboard
-    shadowOpacity: 0.4, // Same as patientContainer in Dashboard
-    shadowRadius: 6, // Same as patientContainer in Dashboard
->>>>>>> Stashed changes
+    padding: 5, // Reduce padding to close the gap between bubbles
+    marginVertical: 5, // Reduce vertical margin to close the gap between bubbles
+    alignItems: 'center',
+    width: '90%', // Adjust the width to fit aesthetically in the iPhone 14 screen
+    alignSelf: 'center', // Center the post container
   },
-  activityName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-<<<<<<< Updated upstream
-  },
-  dateTime: {
-    fontSize: 14,
-    color: '#888',
-=======
-    color: '#000', // Change text color to black for better readability
-  },
-  dateTime: {
-    fontSize: 14,
-    color: '#000', // Change text color to black for better readability
->>>>>>> Stashed changes
-    marginBottom: 10,
+  imageContainer: {
+    backgroundColor: '#6699CC',
+    borderRadius: 10,
+    width: '100%',
+    padding: 15, // Increase padding to create a larger border around the image
+    alignItems: 'center',
   },
   photo: {
     width: '100%',
-    height: 200,
-<<<<<<< Updated upstream
-=======
-    borderRadius: 10, // Add a border radius to the photo
->>>>>>> Stashed changes
+    height: 220, // Increase the height of the image
+    borderRadius: 10,
+  },
+  likeButton: {
+    position: 'absolute',
+    right: 15, // Increase the space for the like button
+    bottom: 15, // Increase the space for the like button
+    backgroundColor: 'white', // Make the like button a white circle
+    borderRadius: 15, // Add a border radius to the like button
+    padding: 5, // Add padding to the like button
   },
   caption: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     padding: 10,
-    marginTop: 5,
-<<<<<<< Updated upstream
-=======
+    marginTop: 5, // Reduce the space between the blue bubble and the caption input box
+    alignSelf: 'stretch',
     fontStyle: 'italic', // Make the caption italic
->>>>>>> Stashed changes
   },
   cameraButton: {
     position: 'absolute',
     right: 20,
-    bottom: 20,
-<<<<<<< Updated upstream
-    backgroundColor: '#2f6be4',
-=======
-    backgroundColor: '#949494', // Same as handleBar in Dashboard
->>>>>>> Stashed changes
+    bottom: 70, // Move the upload button a little higher
+    backgroundColor: 'blue',
     borderRadius: 50,
-    width: 50,
-    height: 50,
+    width: 70, // Make the upload button larger
+    height: 70, // Make the upload button larger
     justifyContent: 'center',
     alignItems: 'center',
-<<<<<<< Updated upstream
-    shadowColor: 'black',
-    shadowOpacity: 0.4,
-    shadowRadius: 6,
   },
 });
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
-    shadowColor: 'black', // Same as patientContainer in Dashboard
-    shadowOpacity: 0.4, // Same as patientContainer in Dashboard
-    shadowRadius: 6, // Same as patientContainer in Dashboard
-  },
-});
-
-
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 export default Activity;
 
