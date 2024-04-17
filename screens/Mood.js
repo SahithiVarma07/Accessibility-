@@ -108,13 +108,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   moodButton: {
-    backgroundColor: '#7CB3F3',
-    borderRadius: 20,
-    padding: 20,
-    margin: 10,
-    width: '30%',
+    backgroundColor: '#7CB3F3', // Light blue background color
+    borderRadius: 20, // Rounded corners
+    paddingVertical: 10, // Adjust vertical padding
+    paddingHorizontal: 10, // Adjust horizontal padding
+    margin: 5, // Set margin to ensure fit
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000', // Shadow color for iOS
+    shadowOffset: { width: 0, height: 1 }, // Shadow position for iOS
+    shadowOpacity: 0.2, // Shadow opacity for iOS
+    shadowRadius: 2, // Shadow blur radius for iOS
+    elevation: 3, // Adds a drop shadow on Android
+    width: '30%', // Adjust width to fit three items per row
   },
   selectedMoodButton: {
     backgroundColor: '#2f6be4',
@@ -129,10 +135,11 @@ const styles = StyleSheet.create({
   },
   moodsContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
+    flexWrap: 'wrap', // Allows the items to wrap to the next line
     marginBottom: 20,
+    paddingHorizontal: 10, // Reduces horizontal padding if needed
   },
   selectedMoodText: {
     fontSize: 18,
