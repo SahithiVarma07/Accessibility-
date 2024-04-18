@@ -11,6 +11,11 @@ const PatientProfile = () => {
 
   const { patientName } = route.params;
 
+  // Function to get the first name from a full name string
+  const getFirstName = (fullName) => {
+    return fullName.split(' ')[0]; // Splits the name by spaces and returns the first element
+  };
+
   // dummy data - backend data pending
   const activitiesGroupedByDate = {
     'Thursday, February 29': [
@@ -45,6 +50,24 @@ const PatientProfile = () => {
         title: 'Activity Title',
         time: '0:00 PM - 0:00 PM',
         image: require('../assets/default.png'),
+      },
+      {
+        id: 6,
+        title: 'Activity Title',
+        time: '0:00 PM - 0:00 PM',
+        image: require('../assets/default.png'),
+      },
+      {
+        id: 7,
+        title: 'Activity Title',
+        time: '0:00 PM - 0:00 PM',
+        image: require('../assets/default.png'),
+      },
+      {
+        id: 8,
+        title: 'Activity Title',
+        time: '0:00 PM - 0:00 PM',
+        image: require('../assets/default.png'),
       }
     ],
   };
@@ -55,9 +78,11 @@ const PatientProfile = () => {
      
       <View style={styles.activityContainer}>
 
-        <ScrollView style={styles.screenBodyContent}>
-          <View style={styles.handleBar} />
-          <Text style={styles.scheduleTitle}>Patient's Schedule</Text>
+        <ScrollView style={styles.screenBodyContent}> 
+          <View style={styles.activityContainerPosts}>
+
+          {/* <View style={styles.handleBar} /> */}
+          <Text style={styles.scheduleTitle}> {getFirstName(patientName)}'s Schedule</Text>
           {/* iterates through date groups & activities */}
           {Object.entries(activitiesGroupedByDate).map(([date, activities], index, array) => (
           <View key={date}>
@@ -80,6 +105,7 @@ const PatientProfile = () => {
             ))}
           </View>
           ))}
+          </View>
         </ScrollView>
       </View>
       
@@ -165,6 +191,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     color: '#333',
+  },
+  activityContainerPosts: {
+    marginTop: 10,
+    marginBottom: 130,
   },
   activityTime: {
     fontSize: 14,

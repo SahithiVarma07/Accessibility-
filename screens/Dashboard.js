@@ -88,15 +88,6 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     overflow: 'hidden',
   },
-  handleBar: {
-    alignSelf: 'center',
-    marginTop: 20,
-    width: 77,
-    height: 3,
-    backgroundColor: '#949494',
-    borderRadius: 3,
-    marginBottom: 20,
-  },
   searchBar: {
     height: 40,
     width: 325,

@@ -17,7 +17,7 @@ const NavBar = ({ navigation, patientName, specialIcon }) => {
       <TouchableOpacity onPress={() => navigation.navigate('PatientProfile', { patientName })}>
         <FontAwesome6 name="house" size={40} color={getIconColor('house')} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Calls')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Calls', { patientName })}>
         <Ionicons name="calendar" size={40} color={getIconColor('calendar')} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Mood', { patientName })}>

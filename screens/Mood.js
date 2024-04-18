@@ -43,7 +43,7 @@ const Mood = () => {
 
       <PatientHeader patientName={patientName} leftIconName="grid" rightIconName="person-circle-outline" />
       <View style={styles.patientContainerShadow}>
-        {/*<View style={styles.patientContainer}> move line 48 above scroll view? */}
+        {/* <View style={styles.patientContainer}> move line 48 above scroll view? */}
         <ScrollView style={styles.container}>
           <View style={styles.screenBodyContent}>  
             <View style={styles.handleBar} />
