@@ -1,24 +1,19 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity, Image } from 'react-native';
-import { Ionicons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Modal, TextInput, Button } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import PatientHeader from '../components/PatientHeader'; 
 import NavBar from '../components/NavBar';
+import DateTimePicker from '@react-native-community/datetimepicker'; // Import DateTimePicker
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { format } from 'date-fns';
 
 const PatientProfile = () => {
   const navigation = useNavigation();
   const route = useRoute();
-
   const { patientName } = route.params;
 
-  // Function to get the first name from a full name string
-  const getFirstName = (fullName) => {
-    return fullName.split(' ')[0]; // Splits the name by spaces and returns the first element
-  };
-
-  // dummy data - backend data pending
-  const activitiesGroupedByDate = {
-    'Thursday, February 29': [
+  const [activitiesGroupedByDate, setActivitiesGroupedByDate] = useState({
+    'Wed Apr 17 2024 18:00:00 GMT-0500': [
       {
         id: 1,
         title: 'Breakfast in Bed',
@@ -38,81 +33,165 @@ const PatientProfile = () => {
         image: require('../assets/karaoke.png'),
       }
     ],
-    'Wednesday, February 28': [
+    'Tue Apr 16 2024 18:00:00 GMT-0500': [
       {
         id: 4,
         title: 'Activity Title',
         time: '0:00 PM - 0:00 PM',
-        image: require('../assets/default.png'),
+        image: require('../assets/bday.png'),
       },
       {
         id: 5,
         title: 'Activity Title',
         time: '0:00 PM - 0:00 PM',
-        image: require('../assets/default.png'),
+        image: require('../assets/breakfast.png'),
       },
-      {
-        id: 6,
-        title: 'Activity Title',
-        time: '0:00 PM - 0:00 PM',
-        image: require('../assets/default.png'),
-      },
-      {
-        id: 7,
-        title: 'Activity Title',
-        time: '0:00 PM - 0:00 PM',
-        image: require('../assets/default.png'),
-      },
-      {
-        id: 8,
-        title: 'Activity Title',
-        time: '0:00 PM - 0:00 PM',
-        image: require('../assets/default.png'),
-      }
     ],
+  });
+  const [modalVisible, setModalVisible] = useState(false);
+  const [newActivity, setNewActivity] = useState({
+    dateTime: new Date(),  // Stores both date and time
+    title: '',
+    time: '',
+    image: require('../assets/breakfast.png')
+  });
+
+  const formatTimeRange = (startDate, durationMinutes = 30) => {
+    const endDate = new Date(startDate.getTime() + durationMinutes * 60000); // Add minutes
+  
+    const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+    const startTime = startDate.toLocaleTimeString('en-US', options);
+    const endTime = endDate.toLocaleTimeString('en-US', options);
+  
+    return `${startTime} - ${endTime}`;
+  };
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long', // "Thursday"
+      month: 'long', // "February"
+      day: 'numeric' // "29"
+    });
+  };
+  
+
+  const [datePickerVisible, setDatePickerVisible] = useState(true);
+  const [timePickerVisible, setTimePickerVisible] = useState(true);
+
+  const getFirstName = (fullName) => {
+    return fullName.split(' ')[0];
+  };
+
+  const handleDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || newActivity.dateTime;
+
+    setNewActivity(prev => ({
+      ...prev,
+      dateTime: new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate(),
+      ),
+      time: formatTimeRange(currentDate),
+    }));
+  };
+
+
+  const handleAddActivity = () => {
+    const newActivities = { ...activitiesGroupedByDate };
+    if (newActivities[newActivity.dateTime]) {
+      newActivities[newActivity.dateTime].push({
+        id: Math.max(...Object.values(newActivities).flat().map(activity => activity.id)) + 1,
+        title: newActivity.title,
+        time: newActivity.time,
+        image: newActivity.image,
+      });
+    } else {
+      newActivities[newActivity.dateTime] = [{
+        id: Math.max(...Object.values(newActivities).flat().map(activity => activity.id)) + 1,
+        title: newActivity.title,
+        time: newActivity.time,
+        image: newActivity.image,
+      }];
+    }
+    setActivitiesGroupedByDate(newActivities);
+    setModalVisible(false);
   };
 
   return (
     <View style={styles.fullScreenContainer}>
-      <PatientHeader patientName={patientName} leftIconName={ "grid" } rightIconName={"person-circle-outline"} />
-     
+      <PatientHeader patientName={patientName} leftIconName={"grid"} rightIconName={"person-circle-outline"} />
       <View style={styles.activityContainer}>
-
-        <ScrollView style={styles.screenBodyContent}> 
-          <View style={styles.activityContainerPosts}>
-
-          {/* <View style={styles.handleBar} /> */}
-          <Text style={styles.scheduleTitle}> {getFirstName(patientName)}'s Schedule</Text>
-          {/* iterates through date groups & activities */}
-          {Object.entries(activitiesGroupedByDate).map(([date, activities], index, array) => (
-          <View key={date}>
-            {/* only adds divider if not first day */}
-            {index !== 0 && <View style={styles.divider} />}
-            <Text style={styles.dateHeader}>{date}</Text>
-            {activities.map((activity) => (
-              <TouchableOpacity 
-                key={activity.id} 
-                style={styles.activityItem} 
-                onPress={() => navigation.navigate('Activity', { activityId: activity.id })}>
-                {activity.image && (
-                  <Image source={activity.image} style={styles.activityImage} />
-                )}
-                <View style={styles.activityContent}>
-                  <Text style={styles.activityTitle}>{activity.title}</Text>
-                  <Text style={styles.activityTime}>{activity.time}</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
+      <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(!modalVisible)}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.prompt}>Activity Title</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={text => setNewActivity(prev => ({ ...prev, title: text }))}
+                placeholder="Activity title"
+                value={newActivity.title}
+              />
+              <Text style={styles.prompt}>Time</Text>
+              {timePickerVisible && (
+                <DateTimePicker
+                  value={newActivity.dateTime} // Make sure this is always a valid date object
+                  mode="time"
+                  display="default"
+                  onChange={handleDateChange}
+                />
+              )}
+              <Text style={styles.prompt}>Date</Text>
+              {datePickerVisible && (
+                <DateTimePicker
+                  value={newActivity.dateTime}
+                  mode="date"
+                  display="default"
+                  onChange={handleDateChange}
+                />
+              )}
+              <Button title="Add Activity" onPress={handleAddActivity} />
+            </View>
           </View>
-          ))}
+        </Modal>
+
+        <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
+          <MaterialIcons name="add" size={40} color="white" />
+        </TouchableOpacity>
+
+        <ScrollView style={styles.scrollBody}> 
+          <Text style={styles.scheduleTitle}> {getFirstName(patientName)}'s Schedule</Text>
+          <View style={styles.activityContainerPosts}>
+            {Object.entries(activitiesGroupedByDate).map(([date, activities], index) => (
+              <View key={date}>
+                {index !== 0 && <View style={styles.divider} />}
+                <Text style={styles.dateHeader}>{formatDate(date)}</Text>
+                {activities.map((activity) => (
+                  <TouchableOpacity 
+                    key={activity.id} 
+                    style={styles.activityItem} 
+                    onPress={() => navigation.navigate('Activity', { activityId: activity.id })}>
+                    {activity.image && (
+                      <Image source={activity.image} style={styles.activityImage} />
+                    )}
+                    <View style={styles.activityContent}>
+                      <Text style={styles.activityTitle}>{activity.title}</Text>
+                      <Text style={styles.activityTime}>{activity.time}</Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ))}
           </View>
         </ScrollView>
       </View>
-      
-      <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate('Activity')}>
-        <MaterialIcons name="add" size={40} color="white" />
-      </TouchableOpacity>
-      
+
       <NavBar navigation={navigation} patientName={patientName} specialIcon="house" />
     </View>
   );
@@ -121,10 +200,8 @@ const PatientProfile = () => {
 const styles = StyleSheet.create({
   fullScreenContainer: {
     flex: 1,
-    //justifyContent: 'space-between',
     backgroundColor: '#2f6be4',
   },
-
   activityContainer: {
     flex: 1,
     borderRadius: 40,
@@ -133,34 +210,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 6,
   },
-  handleBar: {
-    alignSelf: 'center',
-    width: 77,
-    height: 3,
-    backgroundColor: '#949494',
-    borderRadius: 3,
-  },
 
-  screenBodyContent: {
+  scrollBody: {
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-
     backgroundColor: 'white',
-
     paddingVertical: 20,
     paddingHorizontal: 15,
     marginTop: -3,
-
     zIndex: 0,
   },
+
   scheduleTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '500',
     marginBottom: 10,
-    color: '#333',
-    textAlign: 'left',
-    marginLeft: 0, 
+    marginTop: 30,
+    marginLeft: 5,
   },
+
   activityItem: {
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
@@ -175,11 +243,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     elevation: 3,
   },
+
   activityImage: {
     width: 70, 
     height: 70, 
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
+    backgroundColor: '#000',
   },
   activityContent: {
     flex: 1,
@@ -191,16 +261,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     color: '#333',
-  },
-  activityContainerPosts: {
-    marginTop: 10,
-    marginBottom: 130,
+    paddingBottom: 5,
   },
   activityTime: {
     fontSize: 14,
     color: '#666',
   },
-  fab: {
+  activityContainerPosts: {
+    marginTop: 10,
+    marginBottom: 130,
+    marginLeft: 20,
+  },
+  addButton: {
     position: 'absolute',
     margin: 16,
     right: 20,
@@ -208,7 +280,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2f6be4',
     width: 61,
     height: 61,
-    borderRadius: 28,
+    borderRadius: 32,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 6,
@@ -219,23 +291,59 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   dateHeader: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'grey',
-    fontWeight: '500', 
-    paddingTop: 10,
     paddingBottom: 5,
-    paddingLeft: 10, 
-    paddingRight: 10, 
-    width: '100%', 
-    borderTopLeftRadius: 10, 
-    borderTopRightRadius: 10,
-    elevation: 3, 
   },
   divider: {
     height: 2,
     backgroundColor: '#E0E0E0', 
-    width: '100%', 
-    marginVertical: 10, 
+    marginBottom: 10, 
+    marginTop: 10,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  input: {
+    width: 300,
+    height: 40,
+    marginBottom: 12,
+    borderWidth: 1,
+    padding: 10
+  },
+
+  prompt: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 5,
+    fontWeight: 'bold',
+  },
+  dateDisplay: {
+    width: 300,
+    height: 40,
+    lineHeight: 40, // Center text vertically
+    borderWidth: 1,
+    padding: 10,
+    textAlign: 'center',
+    marginBottom: 12,
+    color: '#333',
+    fontSize: 16,
+    backgroundColor: '#fff', // Ensure background is white for visibility
   },
 });
 
