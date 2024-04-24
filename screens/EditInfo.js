@@ -1,48 +1,91 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, StyleSheet, TextInput, Image, Button } from 'react-native';
 import PatientHeader from '../components/PatientHeader'; 
-import { usePatients } from '../PatientsContext';
 import NavBar from '../components/NavBar';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const EditInfo = () => {
-  const { patients } = usePatients(); // Access the patients array from context
-  const route = useRoute();
   const navigation = useNavigation();
+  const route = useRoute();
   const { patientName } = route.params;
 
-  // Find the patient in the patients array
-  const patient = patients.find(p => p.name === patientName);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editPatient, setEditPatient] = useState({
+    name: patientName,
+    age: '30',
+    dob: '1987-05-25',
+    hometown: 'Springfield',
+    family: 'John, Jane, Doe'
+  });
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+    // Here you would typically call a function to update the backend with the new patient data
+    console.log('Saved', editPatient);
+  };
 
   return (
     <View style={styles.container}>
-      <PatientHeader patientName={patient.name} leftIconName="grid" rightIconName="person-circle-outline" />
+      <PatientHeader patientName={editPatient.name} leftIconName="grid" rightIconName="person-circle-outline" />
 
       <View style={styles.contentContainerShadow}>
         <View style={styles.contentContainer}>
           <ScrollView style={styles.scrollableContent} showsVerticalScrollIndicator={true}>
-            <View style={styles.bodyContent}>
-              <Text style={styles.title}>Edit Patient Info</Text>
-            </View>
+            <Text style={styles.title}>Edit Patient Info</Text>
             <View style={styles.infoContainer}>
-              {/* Display the image if patient is found and has an image */}
-              {patient && patient.image && (
-                <Image source={patient.image} style={styles.imagePlaceholder} />
-              )}
+              {/* Static image placeholder for example */}
+              <Image source={require('../assets/photo1.jpg')} style={styles.imagePlaceholder} />
 
               <View style={styles.textContainer}>
-                <Text style={styles.patientNameText}>{ patient.name }</Text>
-                <Text style={styles.infoText}>Age: { patient.age }</Text>
-                <Text style={styles.infoText}>D.O.B: { patient.dob }</Text>
-                <Text style={styles.infoText}>Hometown: { patient.hometown }</Text>
-                <Text style={styles.infoText}>Family: { patient.family }</Text>
+                {isEditing ? (
+                  <>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={text => setEditPatient(prev => ({ ...prev, name: text }))}
+                      value={editPatient.name}
+                    />
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={text => setEditPatient(prev => ({ ...prev, age: text }))}
+                      value={editPatient.age}
+                    />
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={text => setEditPatient(prev => ({ ...prev, dob: text }))}
+                      value={editPatient.dob}
+                    />
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={text => setEditPatient(prev => ({ ...prev, hometown: text }))}
+                      value={editPatient.hometown}
+                    />
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={text => setEditPatient(prev => ({ ...prev, family: text }))}
+                      value={editPatient.family}
+                    />
+                    <Button title="Save" onPress={handleSave} />
+                  </>
+                ) : (
+                  <>
+                    <Text style={styles.text}>{editPatient.name}</Text>
+                    <Text style={styles.text}>Age: {editPatient.age}</Text>
+                    <Text style={styles.text}>D.O.B: {editPatient.dob}</Text>
+                    <Text style={styles.text}>Hometown: {editPatient.hometown}</Text>
+                    <Text style={styles.text}>Family: {editPatient.family}</Text>
+                    <Button title="Edit" onPress={handleEdit} />
+                  </>
+                )}
               </View>
             </View>
           </ScrollView>
         </View>
       </View>
-      <NavBar navigation={navigation} patientName={patientName} specialIcon="person-sharp"/>
+      <NavBar navigation={navigation} patientName={editPatient.name} specialIcon="person-sharp" />
     </View>
   );
 };
@@ -53,71 +96,50 @@ const styles = StyleSheet.create({
     backgroundColor: '#2f6be4', 
   },
   scrollableContent: {
-    flex: 1,
     backgroundColor: 'white', 
   },
-
   contentContainerShadow: {
     flex: 1,
-    borderTopLeftRadius: 100,
-
-    backgroundColor: 'white',
-
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-
+    backgroundColor: 'white',
     shadowColor: 'black',
     shadowOpacity: 0.4,
     shadowRadius: 6,
   },
-
   contentContainer: {
-    flex: 1,
-    borderTopLeftRadius: 100,
-
-    backgroundColor: 'white',
-
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-
     overflow: 'hidden',
   },
-  
-  bodyContent: {
-    paddingBottom: 60, 
-    marginLeft: 18,
-  },
   title: {
-    fontSize: 30,
-    // fontWeight: 'bold',
-    marginTop: 20,
+    fontSize: 24,
+    fontWeight: 'bold',
+    margin: 20,
   },
   infoContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: -40,
-    marginLeft: 14, 
-    marginBottom: 20,
+    padding: 20,
   },
   imagePlaceholder: {
-    width: 170,
-    height: 170,
-    borderRadius: 85,
-    backgroundColor: '#7CB3F3',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
   },
   textContainer: {
-    marginLeft: 14, 
+    marginLeft: 20,
+    flex: 1,
   },
-  patientNameText: {
-    fontSize: 22,
-    fontWeight: 'bold', 
-    color: '#000000',
-    marginBottom: 10, 
+  input: {
+    fontSize: 18,
+    padding: 10,
+    marginBottom: 10,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
   },
-  infoText: {
-    fontSize: 15,
-    color: '#858585',
-    marginBottom: 8, 
+  text: {
+    color: 'gray',
+    fontSize: 16,
+    marginBottom: 10,
   },
 });
 
