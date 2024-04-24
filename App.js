@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Settings } from 'react-native';
 import * as Font from 'expo-font';
 import Dashboard from './screens/Dashboard'; 
 import PatientProfile from './screens/PatientProfile'
@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PatientsProvider } from './PatientsContext'; 
 import Calls from './screens/Calls';
+import AccountScreen from './screens/Settings';
 
 // Function to load fonts
 async function loadFonts() {
@@ -44,6 +45,7 @@ export default function App() {
           <Stack.Screen name="Mood" component={Mood} />
           <Stack.Screen name="Activity" component={Activity} />
           <Stack.Screen name="Calls" component={Calls} />
+          <Stack.Screen name="Settings" component={AccountScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PatientsProvider>
