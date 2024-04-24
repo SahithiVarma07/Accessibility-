@@ -34,12 +34,15 @@ const StaffLog = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <Text style={styles.loginButtonText}>Login</Text>
+      </TouchableOpacity>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleForgotPassword}>
-          <Text style={styles.buttonText}>Forgot Password</Text>
+          <Text style={styles.linkText}>Forgot Password</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleCreateAccount}>
-          <Text style={styles.buttonText}>Create Account</Text>
+          <Text style={styles.linkText}>Create Account</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -68,13 +71,25 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
   },
+  loginButton: {
+    width: '100%',
+    backgroundColor: '#007AFF', // A common blue color for buttons
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  loginButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    marginTop: 20,
   },
-  buttonText: {
+  linkText: {
     color: 'blue',
     textDecorationLine: 'underline',
   },
