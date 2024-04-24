@@ -96,16 +96,26 @@ const Calls = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#2f6be4',
   },
   callContainer: {
-    marginTop: 20, 
     alignItems: 'flex-start', 
     paddingHorizontal: 20, 
+    height: '100%',
+
+    backgroundColor: 'white',
+
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
   },
   callTitle: {
     fontSize: 22, 
     fontWeight: '600', 
+    marginTop: '10%',
   },
   callSubtitle: {
     fontSize: 18, 
