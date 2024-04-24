@@ -12,6 +12,10 @@ const PatientProfile = () => {
   const route = useRoute();
   const { patientName } = route.params;
 
+  const handleCancelAddActivity = () => {
+    setModalVisible(false);
+  };
+
   const [activitiesGroupedByDate, setActivitiesGroupedByDate] = useState({
     'Wed Apr 17 2024 18:00:00 GMT-0500': [
       {
@@ -62,7 +66,8 @@ const PatientProfile = () => {
     const options = { hour: 'numeric', minute: '2-digit', hour12: true };
     const startTime = startDate.toLocaleTimeString('en-US', options);
     const endTime = endDate.toLocaleTimeString('en-US', options);
-  
+
+
     return `${startTime} - ${endTime}`;
   };
 
@@ -157,6 +162,7 @@ const PatientProfile = () => {
                 />
               )}
               <Button title="Add Activity" onPress={handleAddActivity} />
+              <Button title="Cancel" color="red" onPress={handleCancelAddActivity} />
             </View>
           </View>
         </Modal>
