@@ -19,27 +19,29 @@ const EditInfo = () => {
     <View style={styles.container}>
       <PatientHeader patientName={patient.name} leftIconName="grid" rightIconName="person-circle-outline" />
 
-      {/* Scrollable Body Content */}
-      <ScrollView style={styles.scrollableContent} showsVerticalScrollIndicator={true}>
-        <View style={styles.handleBar} />
-        <View style={styles.bodyContent}>
-          <Text style={styles.title}>Edit Patient Info</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          {/* Display the image if patient is found and has an image */}
-          {patient && patient.image && (
-            <Image source={patient.image} style={styles.imagePlaceholder} />
-          )}
+      <View style={styles.contentContainerShadow}>
+        <View style={styles.contentContainer}>
+          <ScrollView style={styles.scrollableContent} showsVerticalScrollIndicator={true}>
+            <View style={styles.bodyContent}>
+              <Text style={styles.title}>Edit Patient Info</Text>
+            </View>
+            <View style={styles.infoContainer}>
+              {/* Display the image if patient is found and has an image */}
+              {patient && patient.image && (
+                <Image source={patient.image} style={styles.imagePlaceholder} />
+              )}
 
-          <View style={styles.textContainer}>
-            <Text style={styles.patientNameText}>{ patient.name }</Text>
-            <Text style={styles.infoText}>Age: { patient.age }</Text>
-            <Text style={styles.infoText}>D.O.B: { patient.dob }</Text>
-            <Text style={styles.infoText}>Hometown: { patient.hometown }</Text>
-            <Text style={styles.infoText}>Family: { patient.family }</Text>
-          </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.patientNameText}>{ patient.name }</Text>
+                <Text style={styles.infoText}>Age: { patient.age }</Text>
+                <Text style={styles.infoText}>D.O.B: { patient.dob }</Text>
+                <Text style={styles.infoText}>Hometown: { patient.hometown }</Text>
+                <Text style={styles.infoText}>Family: { patient.family }</Text>
+              </View>
+            </View>
+          </ScrollView>
         </View>
-      </ScrollView>
+      </View>
       <NavBar navigation={navigation} patientName={patientName} specialIcon="person-sharp"/>
     </View>
   );
@@ -54,13 +56,33 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white', 
   },
-  handleBar: {
-    alignSelf: 'center',
-    width: 77,
-    height: 3,
-    backgroundColor: '#949494',
-    borderRadius: 3,
+
+  contentContainerShadow: {
+    flex: 1,
+    borderTopLeftRadius: 100,
+
+    backgroundColor: 'white',
+
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
   },
+
+  contentContainer: {
+    flex: 1,
+    borderTopLeftRadius: 100,
+
+    backgroundColor: 'white',
+
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+
+    overflow: 'hidden',
+  },
+  
   bodyContent: {
     paddingBottom: 60, 
     marginLeft: 18,

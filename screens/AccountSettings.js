@@ -88,6 +88,8 @@ const styles = StyleSheet.create({
     width: 140,
     height: 140,
     borderRadius: 80,
+
+    backgroundColor: '#2f6be4',
   },
   profileName: {
     marginTop: 10,

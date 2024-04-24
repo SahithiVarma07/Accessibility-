@@ -38,45 +38,52 @@ const Mood = () => {
   return (
     <View style={styles.fullScreenContainer}>
       <PatientHeader patientName={patientName} leftIconName="grid" rightIconName="person-circle-outline" />
-      <ScrollView style={styles.container}>
-        <View style={styles.screenBodyContent}>
-          <View style={styles.handleBar} />
-          <Text style={styles.title}>Select Mood</Text>
-          <View style={styles.moodsContainer}>
-            {moods.map((mood, index) => (
-              <TouchableOpacity
-                key={index}
-                style={[styles.moodButton, selectedMood === mood && styles.selectedMoodButton]}
-                onPress={() => setSelectedMood(mood)}
-              >
-                <Text style={styles.moodText}>{mood}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-          {selectedMood && (
-            <Text style={styles.selectedMoodText}>Selected Mood: {selectedMood}</Text>
-          )}
-          <Text style={styles.statsTitle}>Calendar</Text>
-          <Calendar
-            markingType={'custom'}
-            markedDates={markedDates}
-            onDayPress={({ dateString }) => onMoodPress(dateString)}
-            dayComponent={({ date, state }) => {
-              const mood = markedDates[date.dateString]?.mood;
-              return (
-                <TouchableOpacity onPress={() => onMoodPress(date.dateString)}>
-                  <View style={styles.calendarDay}>
-                    <View style={[styles.calendarDayInner, { borderColor: mood ? '#7CB3F3' : 'transparent' }]}>
-                      <Text style={[styles.calendarDayText, { color: mood ? '#7CB3F3' : 'black' }]}>{date.day}</Text>
-                      <Text style={[styles.calendarMoodText, { color: mood ? '#7CB3F3' : 'black' }]}>{mood || ' '}</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
+
+      <View style={styles.contentContainerShadow}>
+        <View style={styles.contentContainer}>
+
+          <ScrollView style={styles.container}>
+            <View style={styles.screenBodyContent}>
+              <Text style={styles.title}>Select Mood</Text>
+              <View style={styles.moodsContainer}>
+                {moods.map((mood, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={[styles.moodButton, selectedMood === mood && styles.selectedMoodButton]}
+                    onPress={() => setSelectedMood(mood)}
+                  >
+                    <Text style={styles.moodText}>{mood}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+              {selectedMood && (
+                <Text style={styles.selectedMoodText}>Selected Mood: {selectedMood}</Text>
+              )}
+              <Text style={styles.statsTitle}>Calendar</Text>
+              <Calendar
+                markingType={'custom'}
+                markedDates={markedDates}
+                onDayPress={({ dateString }) => onMoodPress(dateString)}
+                dayComponent={({ date, state }) => {
+                  const mood = markedDates[date.dateString]?.mood;
+                  return (
+                    <TouchableOpacity onPress={() => onMoodPress(date.dateString)}>
+                      <View style={styles.calendarDay}>
+                        <View style={[styles.calendarDayInner, { borderColor: mood ? '#7CB3F3' : 'transparent' }]}>
+                          <Text style={[styles.calendarDayText, { color: mood ? '#7CB3F3' : 'black' }]}>{date.day}</Text>
+                          <Text style={[styles.calendarMoodText, { color: mood ? '#7CB3F3' : 'black' }]}>{mood || ' '}</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  );
+                }}
+              />
+            </View>
+          </ScrollView>
+
         </View>
-      </ScrollView>
+      </View>
+
       <NavBar navigation={navigation} patientName={patientName} specialIcon="chart-line" />
     </View>
   );
@@ -85,12 +92,39 @@ const Mood = () => {
 const styles = StyleSheet.create({
   fullScreenContainer: {
     flex: 1,
-    justifyContent: 'space-between',
+    backgroundColor: '#2f6be4',
   },
   container: {
     flex: 1,
-    backgroundColor: '#E6F4EA',
+    backgroundColor: 'white',
   },
+
+  contentContainerShadow: {
+    flex: 1,
+    borderTopLeftRadius: 100,
+
+    backgroundColor: 'white',
+
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+  },
+
+  contentContainer: {
+    flex: 1,
+    borderTopLeftRadius: 100,
+
+    backgroundColor: 'white',
+
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+
+    overflow: 'hidden',
+  },
+
   screenBodyContent: {
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
@@ -98,14 +132,8 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 35,
     marginTop: -20,
-  },
-  handleBar: {
-    alignSelf: 'center',
-    width: 77,
-    height: 3,
-    backgroundColor: '#CCC',
-    borderRadius: 3,
-    marginBottom: 20,
+
+    marginBottom: 130,
   },
   moodButton: {
     backgroundColor: '#7CB3F3', // Light blue background color
