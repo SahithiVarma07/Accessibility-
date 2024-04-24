@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, TextInput } from 'react-native';
 import DashboardHeader from '../components/DashboardHeader'; 
 import PatientButton from '../components/PatientButton'; 
 import { useNavigation } from '@react-navigation/native';
-import { db } from '../Firebase'; // Adjusted import path
+import { db } from '../Firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
 const Dashboard = () => {
@@ -16,7 +16,7 @@ const Dashboard = () => {
       const querySnapshot = await getDocs(collection(db, "users"));
       const patientList = querySnapshot.docs.map(doc => ({
         name: doc.data().name,
-        image: doc.data().image, // Ensure image URL/path is stored in Firestore
+        image: doc.data().image,
       }));
       setPatients(patientList);
     };
