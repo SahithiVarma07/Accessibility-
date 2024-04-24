@@ -11,6 +11,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PatientsProvider } from './PatientsContext'; 
 import Calls from './screens/Calls';
 import AccountSettings from './screens/AccountSettings';
+import WelcomeScreen from './screens/WelcomeScreen';
+import StaffLog from './screens/StaffLog';
+import FamilyLog from './screens/FamilyLog';
 
 // Function to load fonts
 async function loadFonts() {
@@ -39,6 +42,9 @@ export default function App() {
     <PatientsProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
+        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name="StaffLog" component={StaffLog} />
+        <Stack.Screen name="FamilyLog" component={FamilyLog} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="PatientProfile" component={PatientProfile} options={{ title: 'Patient Profile' }} />
           <Stack.Screen name="EditInfo" component={EditInfo} />
@@ -46,6 +52,7 @@ export default function App() {
           <Stack.Screen name="Activity" component={Activity} />
           <Stack.Screen name="Calls" component={Calls} />
           <Stack.Screen name="AccountSettings" component={AccountSettings} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </PatientsProvider>
