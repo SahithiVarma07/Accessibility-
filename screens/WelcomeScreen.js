@@ -3,11 +3,11 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const WelcomeScreen = ({ navigation }) => {
   const handleStaffLoginPress = () => {
-    navigation.navigate('StaffLogin');
+    navigation.navigate('StaffLog');
   };
 
   const handleFamilyLoginPress = () => {
-    navigation.navigate('FamilyLogin');
+    navigation.navigate('FamilyLog');
   };
 
 

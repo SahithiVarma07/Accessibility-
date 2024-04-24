@@ -43,8 +43,8 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        <Stack.Screen name="StaffLog" component={StaffLog} />
         <Stack.Screen name="FamilyLog" component={FamilyLog} />
+        <Stack.Screen name="StaffLog" component={StaffLog} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="PatientProfile" component={PatientProfile} options={{ title: 'Patient Profile' }} />
           <Stack.Screen name="EditInfo" component={EditInfo} />
