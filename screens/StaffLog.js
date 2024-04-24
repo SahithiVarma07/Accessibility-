@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const StaffLog = () => {
   const [username, setUsername] = useState('');
@@ -8,6 +9,7 @@ const StaffLog = () => {
 
   const handleLogin = () => {
     // Implement login logic
+    navigation.navigate('Dashboard');
   };
 
   const handleForgotPassword = () => {
