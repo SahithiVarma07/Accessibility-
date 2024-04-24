@@ -1,39 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView, StyleSheet, TextInput } from 'react-native';
 import DashboardHeader from '../components/DashboardHeader'; 
 import PatientButton from '../components/PatientButton'; 
 import { useNavigation } from '@react-navigation/native';
+import { db } from '../Firebase'; // Adjusted import path
+import { collection, getDocs } from 'firebase/firestore';
 
 const Dashboard = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // patient names
-  const patients = [
-    { name: 'Agnes Young', image: require('../assets/patient_images/patient1.jpeg') },
-    { name: 'Dorren Johnson', image: require('../assets/patient_images/patient2.jpeg') },
-    { name: 'Harvey Walker', image: require('../assets/patient_images/patient3.jpeg') },
-    { name: 'Alaina Garcia', image: require('../assets/patient_images/patient4.jpeg') },
-    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
-    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
-    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
-    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
-    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
-    { name: 'An Chen', image: require('../assets/patient_images/patient5.jpeg') },
-  ];
+  const [patients, setPatients] = useState([]);
 
-  // filtered patients based on search query
+  useEffect(() => {
+    const fetchPatients = async () => {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const patientList = querySnapshot.docs.map(doc => ({
+        name: doc.data().name,
+        image: doc.data().image, // Ensure image URL/path is stored in Firestore
+      }));
+      setPatients(patientList);
+    };
+
+    fetchPatients();
+  }, []);
+
+  // Filtered patients based on search query
   const filteredPatients = patients.filter(patient =>
     patient.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // patient button press
+  // Patient button press
   const onPatientPress = (patientName) => {
     console.log('Pressed:', patientName);
     navigation.navigate('PatientProfile', { patientName });
   };
 
-  // search bar functionality
+  // Search bar functionality
   const handleSearch = (query) => {
     setSearchQuery(query);
   };
@@ -57,7 +59,7 @@ const Dashboard = () => {
               <PatientButton
                 key={index}
                 patientName={patient.name}
-                image={patient.image}
+                image={patient.image} // This should be updated to handle image loading
                 onPress={() => onPatientPress(patient.name)}
               />
             ))}
