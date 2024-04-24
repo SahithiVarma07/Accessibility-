@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2f6be4',
   },
+
   activityContainer: {
     flex: 1,
     borderRadius: 40,
@@ -215,10 +216,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     backgroundColor: 'white',
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    marginTop: -3,
-    zIndex: 0,
   },
 
   scheduleTitle: {
