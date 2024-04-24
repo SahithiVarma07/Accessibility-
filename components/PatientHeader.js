@@ -15,7 +15,7 @@ const PatientHeader = ( { patientName, leftIconName, rightIconName } ) => {
 
       <Text style={styles.headerTitle}> { patientName } </Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate('EditInfo', { patientName })}>
+      <TouchableOpacity onPress={() => navigation.navigate('AccountSettings')}>
         <Ionicons style={styles.rightIcon} name= { rightIconName } size={40} color="white" />
       </TouchableOpacity>
 
