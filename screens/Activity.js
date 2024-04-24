@@ -37,11 +37,11 @@ const Activity = () => {
       });
       if (!result.cancelled) {
         const newPost = {
-          photo: result.uri,
+          photo: result.assets[0].uri,
           caption: 'New Photo',
         };
         setPosts(currentPosts => [...currentPosts, newPost]);
-        console.log("New photo added:", result.uri); // Debug: confirm URI is added
+        console.log("New photo added:", result.assets[0].uri); // Debug: confirm URI is added
       }
     }
   };
