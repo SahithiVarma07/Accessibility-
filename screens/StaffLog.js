@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 
 const StaffLog = () => {
+  const navigation = useNavigation(); // Initialize navigation hook
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     // Implement login logic
+    navigation.navigate('Dashboard');
   };
 
   const handleForgotPassword = () => {
