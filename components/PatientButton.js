@@ -5,7 +5,7 @@ const PatientButton = ({ onPress, patientName, image }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.topSection}>
-        <Image source={image} style={styles.image} />
+        <Image source={{uri: image}} style={styles.image} />
       </View>
       <View style={styles.bottomSection}>
         <Text style={styles.text}>{patientName}</Text>

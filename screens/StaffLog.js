@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 const StaffLog = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation(); // Initialize navigation
 
   const handleLogin = () => {
-    // Implement login logic
+    // Placeholder for login validation logic
+    console.log("Logging in with:", username, password);
+    // Navigate to the Dashboard page
+    navigation.navigate('Dashboard');
   };
 
   const handleForgotPassword = () => {
-    // Navigate to Forgot Password screen or show a prompt
+    // Placeholder for navigation to Forgot Password screen
+    console.log("Forgot Password");
   };
 
   const handleCreateAccount = () => {
-    // Navigate to Create Account screen
+    // Placeholder for navigation to Create Account screen
+    console.log("Create Account");
   };
 
   return (
@@ -73,7 +80,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     width: '100%',
-    backgroundColor: '#007AFF', // A common blue color for buttons
+    backgroundColor: '#007AFF',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
