@@ -14,7 +14,7 @@ const WelcomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
-          source={require('../assets/welcome-illustration.png')} // replace with your local image path
+          source={require('../assets/welcome-illustration.png')}
           style={styles.illustration}
         />
       </View>

@@ -6,14 +6,14 @@ const DashboardHeader = () => {
     <View style={styles.header}>
 
       <Image
-        source={require('../assets/hamburger.png')} // Replace with the actual path to your left icon
+        source={require('../assets/hamburger.png')} 
         style={styles.leftIcon}
       />
       
       <Text style={styles.textWrapper}>Dashboard</Text>
 
       <Image
-        source={require('../assets/user_icon.png')} // Replace with the actual path to your left icon
+        source={require('../assets/user_icon.png')} 
         style={styles.rightIcon}
       />
 

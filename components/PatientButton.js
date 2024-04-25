@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
   button: {
     borderColor: '#000',
     borderRadius: 12,
-    //overflow: 'hidden',
     
     margin: '3%',
     width: '42%',
@@ -31,17 +30,16 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   image: {
-    width: '100%', // Adjust as necessary
-    height: '100%', // Adjust as necessary
-    
-    borderTopLeftRadius: 12,  // Apply borderRadius to maintain rounded corners
+    width: '100%', 
+    height: '100%', 
+    borderTopLeftRadius: 12,  
     borderTopRightRadius: 12,
   },
   topSection: {
     flex: 1, 
     backgroundColor: '#7CB3F3',
 
-    borderTopLeftRadius: 12,  // Apply borderRadius to maintain rounded corners
+    borderTopLeftRadius: 12,  
     borderTopRightRadius: 12,
   },
   bottomSection: {

@@ -24,7 +24,7 @@ const EditInfo = () => {
 
   const handleSave = () => {
     setIsEditing(false);
-    // Here you would typically call a function to update the backend with the new patient data
+    // typically call a function to update the backend with the new patient data
     console.log('Saved', editPatient);
   };
 
@@ -37,7 +37,7 @@ const EditInfo = () => {
           <ScrollView style={styles.scrollableContent} showsVerticalScrollIndicator={true}>
             <Text style={styles.title}>Edit Patient Info</Text>
             <View style={styles.infoContainer}>
-              {/* Static image placeholder for example */}
+              {/* Static image placeholder  */}
               <Image source={require('../assets/photo1.jpg')} style={styles.imagePlaceholder} />
 
               <View style={styles.textContainer}>
