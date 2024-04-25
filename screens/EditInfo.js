@@ -35,7 +35,10 @@ const EditInfo = () => {
       <View style={styles.contentContainerShadow}>
         <View style={styles.contentContainer}>
           <ScrollView style={styles.scrollableContent} showsVerticalScrollIndicator={true}>
-            <Text style={styles.title}>Edit Patient Info</Text>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Edit Patient Info</Text>
+              <Button title="Edit" onPress={handleEdit} style={styles.editButton} />
+            </View>
             <View style={styles.infoContainer}>
               {/* Static image placeholder  */}
               <Image source={require('../assets/photo1.jpg')} style={styles.imagePlaceholder} />
@@ -77,7 +80,6 @@ const EditInfo = () => {
                     <Text style={styles.text}>D.O.B: {editPatient.dob}</Text>
                     <Text style={styles.text}>Hometown: {editPatient.hometown}</Text>
                     <Text style={styles.text}>Family: {editPatient.family}</Text>
-                    <Button title="Edit" onPress={handleEdit} />
                   </>
                 )}
               </View>
@@ -97,11 +99,20 @@ const styles = StyleSheet.create({
   },
   scrollableContent: {
     backgroundColor: 'white', 
+  },  
+
+  titleContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: '10%',
+    marginLeft: '5%',
   },
   contentContainerShadow: {
     flex: 1,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
+
     backgroundColor: 'white',
     shadowColor: 'black',
     shadowOpacity: 0.4,
@@ -109,11 +120,13 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     overflow: 'hidden',
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    margin: 20,
+    marginRight: '30%',
   },
   infoContainer: {
     flexDirection: 'row',
