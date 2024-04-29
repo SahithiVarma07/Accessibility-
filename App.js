@@ -20,7 +20,6 @@ import FamMood from './screens/FamMood';
 import FamEditInfo from './screens/FamEditInfo';
 import FamActivity from './screens/FamActivity';
 
-// Function to load fonts
 async function loadFonts() {
   await Font.loadAsync({
     'Inter': require('./assets/Inter-VariableFont_slnt,wght.ttf'), 
