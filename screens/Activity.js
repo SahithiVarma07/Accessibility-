@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Modal, TextInput, Dimensions } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Modal, TextInput, Animated } from 'react-native';
 import { SimpleLineIcons, FontAwesome, AntDesign } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
@@ -8,24 +8,33 @@ import { collection, deleteDoc, doc, getDocs, addDoc, serverTimestamp, query, or
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 
 const Post = ({ id, photo, caption, onDelete }) => {
+  const swipeableRef = useRef(null);
+
+  const handleSwipeRightOpen = () => {
+    onDelete(id);
+    swipeableRef.current?.close();  // Reset the Swipeable to its closed state
+  };
+
   const renderRightActions = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [0, 0.5, 1, 1],
+      extrapolate: 'clamp',
+    });
     return (
-      <TouchableOpacity onPress={() => onDelete(id)} style={styles.deleteButton}>
-        <Text style={styles.deleteButtonText}>Delete</Text>
+      <TouchableOpacity onPress={() => handleSwipeRightOpen()} style={styles.deleteButton}>
+        <Animated.Text style={[styles.deleteButtonText, { transform: [{ translateX: trans }] }]}>Delete</Animated.Text>
       </TouchableOpacity>
     );
   };
   
-  // Assuming the width of each post is 90% of the container as defined in your styles
-  const screenWidth = Dimensions.get('window').width;
-  const swipeThreshold = screenWidth * 0.9 * 0.3; // 30% of the post's width
-
   return (
     <View style={styles.postContainer}>
       <Swipeable
+        friction={1} // Adjust this value as needed to modify the swipe feel
+        ref={swipeableRef}
         renderRightActions={renderRightActions}
-        friction={2} // Adjust this value as needed to modify the swipe feel
-        rightThreshold={swipeThreshold} // Set the swipe threshold
+        onSwipeableRightOpen={handleSwipeRightOpen}
       >
         <View style={styles.imageContainer}>
           <Image source={{ uri: photo }} style={styles.photo} />
@@ -285,9 +294,9 @@ const styles = StyleSheet.create({
   },
 
   deleteButton: {
-    flex: 1,
     backgroundColor: 'red',
     justifyContent: 'center',
+    padding: 20,
     alignItems: 'flex-end',
     paddingRight: 20,
     margin: 5,
@@ -298,6 +307,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
 
 export default Activity;
