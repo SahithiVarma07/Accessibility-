@@ -20,7 +20,7 @@ const PatientProfile = () => {
     'Wed Apr 17 2024 18:00:00 GMT-0500': [
       {
         id: 1,
-        title: 'Breakfast in Bed',
+        title: 'Reading Books',
         time: '9:30 AM - 10:00 AM',
         image: require('../assets/breakfast.png'),
       },

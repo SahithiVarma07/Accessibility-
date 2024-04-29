@@ -30,6 +30,14 @@ const Activity = () => {
 
   const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    const newPost = {
+      photo: "https://i.postimg.cc/LHyNtt9w/IMG-7249.avif",
+      caption: 'New Photo',
+    };
+    setPosts([newPost]);
+  }, []);
+
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {

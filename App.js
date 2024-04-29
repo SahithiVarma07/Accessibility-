@@ -18,6 +18,7 @@ import FamPatientProfile from './screens/FamPatientProfile';
 import FamCalls from './screens/FamCalls';
 import FamMood from './screens/FamMood';
 import FamEditInfo from './screens/FamEditInfo';
+import FamActivity from './screens/FamActivity';
 
 // Function to load fonts
 async function loadFonts() {
@@ -60,6 +61,7 @@ export default function App() {
           <Stack.Screen name="FamMood" component={FamMood} />
           <Stack.Screen name="FamCalls" component={FamCalls} />
           <Stack.Screen name="FamEditInfo" component={FamEditInfo} />
+          <Stack.Screen name="FamActivity" component={FamActivity} />
 
 
         </Stack.Navigator>
