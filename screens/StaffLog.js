@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 const StaffLog = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation(); // Initialize navigation
-
+  const navigation = useNavigation(); 
+  
   const handleLogin = () => {
     // Implement login logic
     navigation.navigate('Dashboard');

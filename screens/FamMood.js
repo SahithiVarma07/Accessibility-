@@ -8,8 +8,8 @@ import NavBar from '../components/NavBar';
 
 const Mood = () => {
   const navigation = useNavigation();
-  const [selectedMood, setSelectedMood] = useState(null); // No longer used to change state
-  const [markedDates, setMarkedDates] = useState({}); // Static display only
+  const [markedDates, setMarkedDates] = useState({});
+  const moods = ['😄', '🙂', '😐', '😕', '😠', '🤢'];
 
   const route = useRoute();
   const { patientName } = route.params;
@@ -31,26 +31,39 @@ const Mood = () => {
 
       <View style={styles.contentContainerShadow}>
         <View style={styles.contentContainer}>
+
           <ScrollView style={styles.container}>
             <View style={styles.screenBodyContent}>
-              <Text style={styles.title}>Select Mood</Text>
+              <Text style={styles.title}>Mood History</Text>
               <View style={styles.moodsContainer}>
                 {moods.map((mood, index) => (
-                  <View key={index} style={styles.moodButton}>
+                  <View
+                    key={index}
+                    style={[styles.moodButton, styles.moodButtonDisabled]}
+                  >
                     <Text style={styles.moodText}>{mood}</Text>
                   </View>
                 ))}
               </View>
-              {selectedMood && (
-                <Text style={styles.selectedMoodText}>Selected Mood: {selectedMood}</Text>
-              )}
               <Text style={styles.statsTitle}>Calendar</Text>
               <Calendar
                 markingType={'custom'}
                 markedDates={markedDates}
+                dayComponent={({ date, state }) => {
+                  const mood = markedDates[date.dateString]?.mood;
+                  return (
+                    <View style={styles.calendarDay}>
+                      <View style={[styles.calendarDayInner, { borderColor: mood ? '#7CB3F3' : 'transparent' }]}>
+                        <Text style={[styles.calendarDayText, { color: mood ? '#7CB3F3' : 'black' }]}>{date.day}</Text>
+                        <Text style={[styles.calendarMoodText, { color: mood ? '#7CB3F3' : 'black' }]}>{mood || ' '}</Text>
+                      </View>
+                    </View>
+                  );
+                }}
               />
             </View>
           </ScrollView>
+
         </View>
       </View>
 
@@ -67,6 +80,75 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+
+  contentContainerShadow: {
+    flex: 1,
+    borderTopLeftRadius: 100,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+  },
+
+  contentContainer: {
+    flex: 1,
+    borderTopLeftRadius: 100,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    overflow: 'hidden',
+  },
+
+  screenBodyContent: {
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    backgroundColor: 'white',
+    padding: 20,
+    paddingTop: 35,
+    marginTop: -20,
+    marginBottom: 130,
+  },
+  moodButton: {
+    backgroundColor: '#7CB3F3',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 3,
+    width: '30%',
+  },
+  moodButtonDisabled: {
+    opacity: 0.5, // Add an opacity to indicate that the button is disabled
+  },
+  moodText: {
+    fontSize: 30,
+  },
+  title: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginVertical: 20,
+  },
+  moodsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  statsTitle: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginTop: 40,
   },
 });
 

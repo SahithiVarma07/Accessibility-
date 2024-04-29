@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import PatientHeader from '../components/PatientHeader';
-import NavBar from '../components/NavBar';
+import FamNavBar from '../components/FamNavBar';
 import { useNavigation } from '@react-navigation/native';
 
 const FamilyPatientProfile = () => {
@@ -74,7 +74,7 @@ const FamilyPatientProfile = () => {
           ))}
         </View>
       </ScrollView>
-      <NavBar navigation={navigation} patientName={patientName} specialIcon="house" />
+      <FamNavBar navigation={navigation} patientName={patientName} specialIcon="house" />
     </View>
   );
 };
