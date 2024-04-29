@@ -8,34 +8,6 @@ import { collection, deleteDoc, doc, getDocs, addDoc, serverTimestamp, query, or
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 
 const Post = ({ id, photo, caption, onDelete }) => {
-  const [liked, setLiked] = useState(false);
-  
-  useEffect(() => {
-    console.log("Loading photo at URI:", photo);
-  }, [photo]);
-
-  const renderRightActions = () => {
-    return (
-      <TouchableOpacity onPress={() => onDelete(id)} style={styles.deleteButton}>
-        <Text style={styles.deleteButtonText}>Delete</Text>
-      </TouchableOpacity>
-    );
-  };
-  
-  return (
-    <View style={styles.postContainer}>
-      <View style={styles.postContainerShadow}>
-        <Swipeable renderRightActions={renderRightActions}>
-          <View style={styles.imageContainer}>
-            <Image source={{ uri: photo }} style={styles.photo} />
-          </View>
-        </Swipeable>
-      </View>
-      <Text style={styles.caption}>{caption}</Text>
-    </View>
-  );
-};
-const Post = ({ id, photo, caption, onDelete }) => {
   const renderRightActions = (progress, dragX) => {
     return (
       <TouchableOpacity onPress={() => onDelete(id)} style={styles.deleteButton}>
@@ -58,8 +30,8 @@ const Post = ({ id, photo, caption, onDelete }) => {
         <View style={styles.imageContainer}>
           <Image source={{ uri: photo }} style={styles.photo} />
         </View>
-        <Text style={styles.caption}>{caption}</Text>
       </Swipeable>
+      <Text style={styles.caption}>{caption}</Text>
     </View>
   );
 };
