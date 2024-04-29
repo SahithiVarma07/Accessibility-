@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginBottom: 10,
     marginTop: 30,
-    marginLeft: 5,
+    marginLeft: 15,
   },
 
   activityItem: {
