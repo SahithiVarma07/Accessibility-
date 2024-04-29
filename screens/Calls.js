@@ -58,7 +58,7 @@ const Calls = () => {
       <View style={styles.callContainer}>
         <Text style={styles.callTitle}>{callStatus}</Text>
         <Text style={styles.callSubtitle}>with Family Member</Text>
-        <Text style={styles.callTime}>Friday, 3/1 @ 2:00 PM</Text>
+        <Text style={styles.callTime}>Tuesday, 4/30 @ 10:00 PM</Text>
         {showButtons ? (
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.declineButton} onPress={declineCall}>

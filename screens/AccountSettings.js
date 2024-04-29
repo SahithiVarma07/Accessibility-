@@ -21,7 +21,7 @@ const AccountSettings = ( ) => {
                 source={require('../assets/nurse-profile.png')} 
                 style={styles.profileImage}
               />
-              <Text style={styles.profileName}>Raj</Text>
+              <Text style={styles.profileName}>Ella</Text>
             </View>
 
             <View style={styles.inputContainer}>
