@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { FontAwesome, AntDesign } from '@expo/vector-icons'; 
+import { SimpleLineIcons, FontAwesome, AntDesign } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from '@react-navigation/native';
 
 const Post = ({ photo, caption }) => {
   const [liked, setLiked] = useState(false);
+  
 
   useEffect(() => {
     console.log("Loading photo at URI:", photo); // Debug: log the photo URI
@@ -14,9 +16,9 @@ const Post = ({ photo, caption }) => {
     <View style={styles.postContainer}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: photo }} style={styles.photo} />
-        <TouchableOpacity style={styles.likeButton} onPress={() => setLiked(!liked)}>
+        {/* <TouchableOpacity style={styles.likeButton} onPress={() => setLiked(!liked)}>
           <AntDesign name="heart" size={24} color={liked ? "red" : "gray"} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <Text style={styles.caption}>{caption}</Text>
     </View>
@@ -24,7 +26,16 @@ const Post = ({ photo, caption }) => {
 };
 
 const Activity = () => {
+  const navigation = useNavigation();
+
   const [posts, setPosts] = useState([]);
+
+  // const newPost = {
+  //   photo: "https://i.ibb.co/KGcwcQT/7a2d1bbcb17e077610707779d9fe0bcf.jpg",
+  //   caption: 'Having Fun',
+  // };
+
+  // setPosts(currentPosts => [...currentPosts, newPost]);
 
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -48,13 +59,25 @@ const Activity = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+
       <ScrollView contentContainerStyle={styles.activityScrollContainer}>
+
+        <View style={styles.titleContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <SimpleLineIcons style={styles.backArrow}  name= "arrow-left" />
+          </TouchableOpacity>
+          <View style={styles.textContainer}>
+            <Text style={styles.activityTitle}>Activity Name</Text>
+            <Text style={styles.activityTime}>Thursday, 2/29 @ 10:00 AM</Text>
+          </View>
+        </View>
+
         {posts.map((item, index) => (
           <Post key={index} {...item} />
         ))}
       </ScrollView>
       <TouchableOpacity style={styles.cameraButton} onPress={openCamera}>
-        <FontAwesome name="camera" size={30} color="white" />
+        <AntDesign name="plus" size={50} color="white" />
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -64,25 +87,51 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 10,
   },
+
+  titleContainer: {
+    flexDirection: 'row',
+    paddingTop: 15,
+    paddingLeft: 20,
+  },
+  backArrow: {
+    fontSize: 45,
+    paddingTop: 5,
+  },
+  textContainer: {
+    paddingLeft: 18,
+    paddingBottom: 20,
+  },
+  activityTitle: {
+    fontSize: 24,
+    paddingBottom: 5,
+    color: '#000000'
+  },
+  activityTime: {
+    fontSize: 14,
+    color: '#757575',
+  },
+
   activityScrollContainer: {
     justifyContent: 'center',
   },
   postContainer: {
     borderRadius: 10,
-    padding: 5,
+    paddingLeft: 10,
     marginVertical: 5,
-    alignItems: 'center',
     width: '90%',
     alignSelf: 'center',
+
   },
   imageContainer: {
-    backgroundColor: '#6699CC',
+    backgroundColor: '#88b2ee',
     borderRadius: 10,
     width: '100%',
-    padding: 15,
-    alignItems: 'center',
+    //padding: 10,
+
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
   },
   photo: {
     width: '100%',
@@ -99,20 +148,22 @@ const styles = StyleSheet.create({
   },
   caption: {
     backgroundColor: 'white',
-    padding: 10,
-    marginTop: 5,
-    fontStyle: 'italic',
+    fontSize: 16,
+    paddingTop: 10,
+    paddingVertical: 15,
+    paddingLeft: 5
   },
+
   cameraButton: {
     position: 'absolute',
     right: 20,
     bottom: 70,
-    backgroundColor: 'blue',
     borderRadius: 50,
     width: 70,
     height: 70,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#2656b6',
   },
 });
 

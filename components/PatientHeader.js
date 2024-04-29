@@ -9,7 +9,7 @@ const PatientHeader = ( { patientName, leftIconName, rightIconName } ) => {
   return (
     <View style={styles.headerContainer}>
 
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
         <Ionicons style={styles.leftIcon}  name= { leftIconName } size={32} color="white" />
       </TouchableOpacity>
 
