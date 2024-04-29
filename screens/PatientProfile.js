@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, Modal, Tex
 import { MaterialIcons } from '@expo/vector-icons';
 import PatientHeader from '../components/PatientHeader'; 
 import NavBar from '../components/NavBar';
-import DateTimePicker from '@react-native-community/datetimepicker'; // Import DateTimePicker
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { format } from 'date-fns';
 
@@ -54,14 +54,14 @@ const PatientProfile = () => {
   });
   const [modalVisible, setModalVisible] = useState(false);
   const [newActivity, setNewActivity] = useState({
-    dateTime: new Date(),  // Stores both date and time
+    dateTime: new Date(), 
     title: '',
     time: '',
     image: require('../assets/breakfast.png')
   });
 
   const formatTimeRange = (startDate, durationMinutes = 30) => {
-    const endDate = new Date(startDate.getTime() + durationMinutes * 60000); // Add minutes
+    const endDate = new Date(startDate.getTime() + durationMinutes * 60000); 
   
     const options = { hour: 'numeric', minute: '2-digit', hour12: true };
     const startTime = startDate.toLocaleTimeString('en-US', options);

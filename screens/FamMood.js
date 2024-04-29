@@ -48,7 +48,6 @@ const Mood = () => {
               <Calendar
                 markingType={'custom'}
                 markedDates={markedDates}
-                // Removed interactive elements
               />
             </View>
           </ScrollView>
@@ -61,7 +60,6 @@ const Mood = () => {
 };
 
 const styles = StyleSheet.create({
-  // Style definitions remain the same
   fullScreenContainer: {
     flex: 1,
     backgroundColor: '#2f6be4',
@@ -70,7 +68,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  // Additional styles...
 });
 
 export default Mood;

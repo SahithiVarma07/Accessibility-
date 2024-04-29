@@ -18,7 +18,7 @@ const AccountSettings = ( ) => {
           <ScrollView contentContainerStyle={styles.scrollableContent}>
             <View style={styles.profileContainer}>
               <Image 
-                source={require('../assets/nurse-profile.png')} // replace with your local image
+                source={require('../assets/nurse-profile.png')} 
                 style={styles.profileImage}
               />
               <Text style={styles.profileName}>Raj</Text>

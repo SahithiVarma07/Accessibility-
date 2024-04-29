@@ -9,7 +9,7 @@ const Post = ({ photo, caption }) => {
   useEffect(() => {
     console.log("Loading photo at URI:", photo); // Debug: log the photo URI
   }, [photo]);
-
+ 
   return (
     <View style={styles.postContainer}>
       <View style={styles.imageContainer}>
