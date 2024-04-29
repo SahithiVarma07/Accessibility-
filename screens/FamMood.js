@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     width: '30%',
   },
   moodButtonDisabled: {
-    opacity: 0.5, // Add an opacity to indicate that the button is disabled
+    opacity: 0.5, 
   },
   moodText: {
     fontSize: 30,

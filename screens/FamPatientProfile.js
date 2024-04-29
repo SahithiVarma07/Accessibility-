@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const FamilyPatientProfile = () => {
   const navigation = useNavigation();
-  const patientName = "Doreen Johnson"; // Static for this family view
+  const patientName = "Doreen Johnson";
 
   const activitiesGroupedByDate = {
     'Wed Apr 17 2024 18:00:00 GMT-0500': [
@@ -41,9 +41,9 @@ const FamilyPatientProfile = () => {
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-US', {
-      weekday: 'long', // "Thursday"
-      month: 'long', // "February"
-      day: 'numeric' // "29"
+      weekday: 'long', 
+      month: 'long', 
+      day: 'numeric'
     });
   };
 

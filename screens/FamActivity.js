@@ -9,16 +9,13 @@ const Post = ({ photo, caption }) => {
   
 
   useEffect(() => {
-    console.log("Loading photo at URI:", photo); // Debug: log the photo URI
+    console.log("Loading photo at URI:", photo);
   }, [photo]);
  
   return (
     <View style={styles.postContainer}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: photo }} style={styles.photo} />
-        {/* <TouchableOpacity style={styles.likeButton} onPress={() => setLiked(!liked)}>
-          <AntDesign name="heart" size={24} color={liked ? "red" : "gray"} />
-        </TouchableOpacity> */}
       </View>
       <Text style={styles.caption}>{caption}</Text>
     </View>
@@ -53,7 +50,7 @@ const Activity = () => {
           caption: 'New Photo',
         };
         setPosts(currentPosts => [...currentPosts, newPost]);
-        console.log("New photo added:", result.assets[0].uri); // Debug: confirm URI is added
+        console.log("New photo added:", result.assets[0].uri); 
       }
     }
   };
@@ -128,7 +125,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#88b2ee',
     borderRadius: 10,
     width: '100%',
-    //padding: 10,
 
     shadowColor: 'black',
     shadowOpacity: 0.4,

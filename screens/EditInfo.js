@@ -40,7 +40,6 @@ const EditInfo = () => {
               <Button title="Edit" onPress={handleEdit} style={styles.editButton} />
             </View>
             <View style={styles.infoContainer}>
-              {/* Static image placeholder  */}
               <Image source={require('../assets/photo1.jpg')} style={styles.imagePlaceholder} />
 
               <View style={styles.textContainer}>
