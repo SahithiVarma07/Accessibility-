@@ -3,7 +3,6 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons, FontAwesome6 } from '@expo/vector-icons';
 
 const FamNavBar = ({ navigation, patientName, specialIcon }) => {
-  // Default color setup
   const defaultColor = "#88b3ee"; // blue
   const specialColor = "#056EEC"; // dark blue
 

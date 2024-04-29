@@ -74,9 +74,9 @@ const PatientProfile = () => {
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-US', {
-      weekday: 'long', // "Thursday"
-      month: 'long', // "February"
-      day: 'numeric' // "29"
+      weekday: 'long', 
+      month: 'long', 
+      day: 'numeric',
     });
   };
   
@@ -146,7 +146,7 @@ const PatientProfile = () => {
               <Text style={styles.prompt}>Time</Text>
               {timePickerVisible && (
                 <DateTimePicker
-                  value={newActivity.dateTime} // Make sure this is always a valid date object
+                  value={newActivity.dateTime}
                   mode="time"
                   display="default"
                   onChange={handleDateChange}

@@ -38,7 +38,7 @@ const FamCalls = () => {
       Alert.alert('Error', 'Failed to save the date.');
     }
   };
-//only call when actually needed data 
+  //only call when actually needed data 
   const loadDate = async () => {
     try {
       const value = await AsyncStorage.getItem('scheduledCallDate');

@@ -8,17 +8,15 @@ const StaffLog = () => {
   const navigation = useNavigation(); 
   
   const handleLogin = () => {
-    // Implement login logic
+    // send user to dashboard once logged in
     navigation.navigate('Dashboard');
   };
 
   const handleForgotPassword = () => {
-    // Placeholder for navigation to Forgot Password screen
     console.log("Forgot Password");
   };
 
   const handleCreateAccount = () => {
-    // Placeholder for navigation to Create Account screen
     console.log("Create Account");
   };
 

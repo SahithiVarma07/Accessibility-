@@ -8,16 +8,16 @@ const FamilyLog = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    // Implement login logic
+    // send user to "dashboard" for family
     navigation.navigate('FamPatientProfile');
   };
 
   const handleForgotPassword = () => {
-    // Navigate to Forgot Password screen or show a prompt
+    console.log("Forgot Password");
   };
 
   const handleCreateAccount = () => {
-    // Navigate to Create Account screen
+    console.log("Create Account");
   };
 
   return (

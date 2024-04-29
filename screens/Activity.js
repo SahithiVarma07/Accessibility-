@@ -11,7 +11,7 @@ const Post = ({ id, photo, caption, onDelete }) => {
   const [liked, setLiked] = useState(false);
   
   useEffect(() => {
-    console.log("Loading photo at URI:", photo); // Debug: log the photo URI
+    console.log("Loading photo at URI:", photo);
   }, [photo]);
 
   const renderRightActions = () => {
