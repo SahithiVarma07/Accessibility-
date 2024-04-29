@@ -24,18 +24,15 @@ const Dashboard = () => {
     fetchPatients();
   }, []);
 
-  // Filtered patients based on search query
   const filteredPatients = patients.filter(patient =>
     patient.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Patient button press
   const onPatientPress = (patientName) => {
     console.log('Pressed:', patientName);
     navigation.navigate('PatientProfile', { patientName });
   };
 
-  // Search bar functionality
   const handleSearch = (query) => {
     setSearchQuery(query);
   };
@@ -59,7 +56,7 @@ const Dashboard = () => {
               <PatientButton
                 key={index}
                 patientName={patient.name}
-                image={patient.image} // This should be updated to handle image loading
+                image={patient.image}
                 onPress={() => onPatientPress(patient.name)}
               />
             ))}
@@ -79,9 +76,7 @@ const styles = StyleSheet.create({
   patientContainerShadow: {
     backgroundColor: '#f2f2f2',
     borderRadius: 45,
-    //backgroundColor: '#000',
     flex: 1,
-
     shadowColor: 'black',
     shadowOpacity: 0.4,
     shadowRadius: 6,
@@ -93,11 +88,8 @@ const styles = StyleSheet.create({
   searchBar: {
     height: 40,
     width: 325,
-    //marginHorizontal: 8,
-    
     marginTop: 40,
     marginBottom: 16,
-
     borderWidth: 1.2,
     borderColor: '#000',
     borderRadius: 12,
@@ -106,19 +98,16 @@ const styles = StyleSheet.create({
   patientsScrollContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    
-    //height: '100%',
     justifyContent: 'center',
   },
   patientButtonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    //justifyContent: 'flex-start',
-    //alignItems: 'flex-start',
-    //paddingHorizontal: 0,
+    justifyContent: 'flex-start',
     paddingLeft: 15,
     marginBottom: 40,
+    width: '100%',  
   },
-});
+  });
 
-export default Dashboard;
+  export default Dashboard;
