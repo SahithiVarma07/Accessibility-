@@ -41,7 +41,7 @@ const FamEditInfo = () => {
             </View>
             <View style={styles.infoContainer}>
               {/* Static image placeholder  */}
-              <Image source={require('../assets/photo1.jpg')} style={styles.imagePlaceholder} />
+              <Image source={require('../assets/doreen.jpg')} style={styles.imagePlaceholder} />
 
               <View style={styles.textContainer}>
                 {isEditing ? (
