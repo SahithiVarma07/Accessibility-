@@ -7,7 +7,7 @@ const FamNavBar = ({ navigation, patientName, specialIcon }) => {
   const defaultColor = "#88b3ee"; // blue
   const specialColor = "#056EEC"; // dark blue
 
-  // Function to determine the color of an icon based on its name
+
   const getIconColor = (iconName) => {
     return iconName === specialIcon ? specialColor : defaultColor;
   };
