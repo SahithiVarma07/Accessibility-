@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Button, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import FamNavBar from '../components/FamNavBar';
 
@@ -17,6 +18,7 @@ const FamCalls = () => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
     setShowPicker(false);
+    saveDate(currentDate);
   };
 
   const showMode = (currentMode) => {
@@ -27,6 +29,25 @@ const FamCalls = () => {
   const scheduleCall = () => {
     Alert.alert('Call Scheduled', `Call is set for ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`);
     navigation.goBack();
+  };
+
+  const saveDate = async (selectedDate) => {
+    try {
+      await AsyncStorage.setItem('scheduledCallDate', JSON.stringify(selectedDate));
+    } catch (error) {
+      Alert.alert('Error', 'Failed to save the date.');
+    }
+  };
+//only call when actually needed data 
+  const loadDate = async () => {
+    try {
+      const value = await AsyncStorage.getItem('scheduledCallDate');
+      if (value !== null) {
+        setDate(new Date(JSON.parse(value)));
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to load the date.');
+    }
   };
 
   return (
@@ -51,7 +72,6 @@ const FamCalls = () => {
           onChange={onChange}
         />
       )}
-      {/* Include the navigation bar */}
       <FamNavBar navigation={navigation} patientName={patientName} specialIcon="calendar" />
     </View>
   );
