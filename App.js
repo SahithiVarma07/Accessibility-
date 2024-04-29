@@ -14,6 +14,7 @@ import AccountSettings from './screens/AccountSettings';
 import WelcomeScreen from './screens/WelcomeScreen';
 import StaffLog from './screens/StaffLog';
 import FamilyLog from './screens/FamilyLog';
+import FamPatientProfile from './screens/FamPatientProfile';
 
 // Function to load fonts
 async function loadFonts() {
@@ -52,6 +53,7 @@ export default function App() {
           <Stack.Screen name="Activity" component={Activity} />
           <Stack.Screen name="Calls" component={Calls} />
           <Stack.Screen name="AccountSettings" component={AccountSettings} />
+          <Stack.Screen name="FamPatientProfile" component={FamPatientProfile} />
 
         </Stack.Navigator>
       </NavigationContainer>
