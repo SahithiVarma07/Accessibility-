@@ -1,11 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Modal, TextInput, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  Modal,
+  TextInput,
+  Animated
+} from 'react-native';
 import { SimpleLineIcons, FontAwesome, AntDesign } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { db } from '../Firebase';
 import { collection, deleteDoc, doc, getDocs, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
+import { ref, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'; // Correct imports for storage
+
 
 const Post = ({ id, photo, caption, onDelete }) => {
   const swipeableRef = useRef(null);
@@ -47,6 +60,8 @@ const Post = ({ id, photo, caption, onDelete }) => {
 
 const Activity = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { activityId, activityTitle, activityTime, activityPhoto } = route.params;
 
   const [posts, setPosts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -75,13 +90,27 @@ const Activity = () => {
   };
 
   const handleAddPost = async () => {
+    const storage = getStorage(); // Get a reference to the storage service
+    const response = await fetch(newPhotoUri);
+    const blob = await response.blob();
+    
+    // Create a reference to the storage at a specific path with a unique timestamp
+    const imageRef = ref(storage, `posts/${Date.now()}`);
+    
+    // Upload the image blob to Firebase Storage
+    const snapshot = await uploadBytes(imageRef, blob);
+    // Get the download URL of the uploaded file
+    const photoURL = await getDownloadURL(snapshot.ref);
+
+    // Construct the post object with the URL of the uploaded image
     const newPost = {
-      photo: newPhotoUri,
+      photo: photoURL, // Use the URL from the uploaded image
       caption: newCaption,
       timestamp: serverTimestamp(),
     };
   
     try {
+      // Add the new post to the Firestore database
       const docRef = await addDoc(collection(db, "posts"), newPost);
       console.log("Document written with ID: ", docRef.id);
       setPosts(currentPosts => [...currentPosts, { ...newPost, id: docRef.id }]);
@@ -91,7 +120,6 @@ const Activity = () => {
       console.error("Error adding document: ", e);
     }
   };
-
 
   const openCamera = async () => {
     try {
@@ -120,7 +148,7 @@ const Activity = () => {
   return (
     <SafeAreaView style={styles.container}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-              <Modal
+        <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
@@ -144,14 +172,16 @@ const Activity = () => {
         </Modal>
 
         <ScrollView contentContainerStyle={styles.activityScrollContainer}>
-
           <View style={styles.titleContainer}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <SimpleLineIcons style={styles.backArrow}  name= "arrow-left" />
+              <SimpleLineIcons style={styles.backArrow} name="arrow-left" />
             </TouchableOpacity>
             <View style={styles.textContainer}>
-              <Text style={styles.activityTitle}>Reading Books</Text>
-              <Text style={styles.activityTime}>Thursday, 4/17 @ 9:00 AM</Text>
+              <Text style={styles.activityTitle}>{activityTitle}</Text>
+              <Text style={styles.activityTime}>{activityTime}</Text>
+              {activityPhoto && (
+                <Image source={{ uri: activityPhoto }} style={styles.photo} />
+              )}
             </View>
           </View>
 

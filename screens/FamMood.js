@@ -4,7 +4,7 @@ import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import PatientHeader from '../components/PatientHeader';
-import NavBar from '../components/NavBar';
+import FamNavBar from '../components/FamNavBar';
 
 const Mood = () => {
   const navigation = useNavigation();
@@ -67,7 +67,7 @@ const Mood = () => {
         </View>
       </View>
 
-      <NavBar navigation={navigation} patientName={patientName} specialIcon="chart-line" />
+      <FamNavBar navigation={navigation} patientName={patientName} specialIcon="chart-line" />
     </View>
   );
 };

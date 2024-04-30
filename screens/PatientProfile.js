@@ -20,15 +20,15 @@ const PatientProfile = () => {
     'Wed Apr 17 2024 18:00:00 GMT-0500': [
       {
         id: 1,
-        title: 'Reading Books',
+        title: 'Eating Breakfast',
         time: '9:30 AM - 10:00 AM',
-        image: require('../assets/breakfast.png'),
+        image: { uri: 'https://images.pexels.com/photos/18429461/pexels-photo-18429461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
       {
         id: 2,
         title: 'Martha\'s Birthday Party',
         time: '1:00 PM - 3:00 PM',
-        image: require('../assets/bday.png'),
+        image: { uri: 'https://images.pexels.com/photos/18459203/pexels-photo-18459203/free-photo-of-caregiver-serving-food-for-elderly-people-in-retirement-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
       {
         id: 3,
@@ -40,15 +40,15 @@ const PatientProfile = () => {
     'Tue Apr 16 2024 18:00:00 GMT-0500': [
       {
         id: 4,
-        title: 'Activity Title',
+        title: 'Eating Breakfast',
         time: '0:00 PM - 0:00 PM',
-        image: require('../assets/bday.png'),
+        image: { uri: 'https://images.pexels.com/photos/18429461/pexels-photo-18429461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
       {
         id: 5,
-        title: 'Activity Title',
+        title: 'An\'s Birthday Party',
         time: '0:00 PM - 0:00 PM',
-        image: require('../assets/breakfast.png'),
+        image: { uri: 'https://images.pexels.com/photos/18459203/pexels-photo-18459203/free-photo-of-caregiver-serving-food-for-elderly-people-in-retirement-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
     ],
   });
@@ -57,7 +57,7 @@ const PatientProfile = () => {
     dateTime: new Date(), 
     title: '',
     time: '',
-    image: require('../assets/breakfast.png')
+    image: require('../assets/breakfast.jpg')
   });
 
   const formatTimeRange = (startDate, durationMinutes = 30) => {
@@ -180,17 +180,23 @@ const PatientProfile = () => {
                 <Text style={styles.dateHeader}>{formatDate(date)}</Text>
                 {activities.map((activity) => (
                   <TouchableOpacity 
-                    key={activity.id} 
-                    style={styles.activityItem} 
-                    onPress={() => navigation.navigate('Activity', { activityId: activity.id })}>
-                    {activity.image && (
-                      <Image source={activity.image} style={styles.activityImage} />
-                    )}
-                    <View style={styles.activityContent}>
-                      <Text style={styles.activityTitle}>{activity.title}</Text>
-                      <Text style={styles.activityTime}>{activity.time}</Text>
-                    </View>
-                  </TouchableOpacity>
+                  key={activity.id} 
+                  style={styles.activityItem} 
+                  onPress={() => navigation.navigate('Activity', {
+                    activityDocumentId: activity.id,
+                    activityTitle: activity.title,
+                    activityTime: activity.time,
+                    activityPhotoUri: activity.photo  // Assuming 'activity.photo' is the URI or require statement for the image
+                  })}
+                >
+                  {activity.image && (
+                    <Image source={activity.image} style={styles.activityImage} />
+                  )}
+                  <View style={styles.activityContent}>
+                    <Text style={styles.activityTitle}>{activity.title}</Text>
+                    <Text style={styles.activityTime}>{activity.time}</Text>
+                  </View>
+                </TouchableOpacity>
                 ))}
               </View>
             ))}
