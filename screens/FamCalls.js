@@ -10,7 +10,14 @@ const FamCalls = () => {
   const route = useRoute();
   const { patientName } = route.params;
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(() => {
+    const now = new Date();
+    now.setHours(22);  // 10 PM in 24-hour format
+    now.setMinutes(0);
+    now.setSeconds(0);
+    now.setMilliseconds(0);
+    return now;
+  });
   const [showPicker, setShowPicker] = useState(false);
   const [mode, setMode] = useState('date');
 

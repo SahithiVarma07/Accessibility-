@@ -40,8 +40,8 @@ const EditInfo = () => {
               <Button title="Edit" onPress={handleEdit} style={styles.editButton} />
             </View>
             <View style={styles.infoContainer}>
-              <Image source={require('../assets/photo1.jpg')} style={styles.imagePlaceholder} />
-
+            <Image source={{uri: 'https://images.pexels.com/photos/18429417/pexels-photo-18429417/free-photo-of-senior-woman-in-striped-t-shirt-sitting-on-a-bed-in-retirement-home-room.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}}
+              style={styles.imagePlaceholder} />
               <View style={styles.textContainer}>
                 {isEditing ? (
                   <>
