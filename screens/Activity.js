@@ -17,7 +17,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { db } from '../Firebase';
 import { collection, deleteDoc, doc, getDocs, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
-import { ref, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'; // Correct imports for storage
+import { ref, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 const Post = ({ id, photo, caption, onDelete }) => {
@@ -25,7 +25,7 @@ const Post = ({ id, photo, caption, onDelete }) => {
 
   const handleSwipeRightOpen = () => {
     onDelete(id);
-    swipeableRef.current?.close();  // Reset the Swipeable to its closed state
+    swipeableRef.current?.close();
   };
 
   const renderRightActions = (progress, dragX) => {
@@ -44,7 +44,7 @@ const Post = ({ id, photo, caption, onDelete }) => {
   return (
     <View style={styles.postContainer}>
       <Swipeable
-        friction={1} // Adjust this value as needed to modify the swipe feel
+        friction={1}
         ref={swipeableRef}
         renderRightActions={renderRightActions}
         onSwipeableRightOpen={handleSwipeRightOpen}
@@ -69,20 +69,18 @@ const Activity = () => {
   const [newPhotoUri, setNewPhotoUri] = useState('');
 
   useEffect(() => {
-    // Function to fetch posts from Firestore
     const fetchPosts = async () => {
       const postsQuery = query(collection(db, "posts"), orderBy("timestamp", "asc"));
       const querySnapshot = await getDocs(postsQuery);
       setPosts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     };
 
-    fetchPosts(); // Fetch posts on component mount
+    fetchPosts(); 
   }, []);
 
   const deletePost = async (id) => {
     try {
       await deleteDoc(doc(db, 'posts', id));
-      // Update the local state to reflect the deletion
       setPosts(currentPosts => currentPosts.filter(post => post.id !== id));
     } catch (error) {
       console.error("Error removing document: ", error);
@@ -90,32 +88,27 @@ const Activity = () => {
   };
 
   const handleAddPost = async () => {
-    const storage = getStorage(); // Get a reference to the storage service
+    const storage = getStorage(); 
     const response = await fetch(newPhotoUri);
     const blob = await response.blob();
     
-    // Create a reference to the storage at a specific path with a unique timestamp
     const imageRef = ref(storage, `posts/${Date.now()}`);
     
-    // Upload the image blob to Firebase Storage
     const snapshot = await uploadBytes(imageRef, blob);
-    // Get the download URL of the uploaded file
     const photoURL = await getDownloadURL(snapshot.ref);
 
-    // Construct the post object with the URL of the uploaded image
     const newPost = {
-      photo: photoURL, // Use the URL from the uploaded image
+      photo: photoURL, 
       caption: newCaption,
       timestamp: serverTimestamp(),
     };
   
     try {
-      // Add the new post to the Firestore database
       const docRef = await addDoc(collection(db, "posts"), newPost);
       console.log("Document written with ID: ", docRef.id);
       setPosts(currentPosts => [...currentPosts, { ...newPost, id: docRef.id }]);
-      setModalVisible(false); // Close the modal
-      setNewCaption(''); // Reset the caption input
+      setModalVisible(false); 
+      setNewCaption(''); 
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -126,7 +119,7 @@ const Activity = () => {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         alert('Sorry, we need camera permissions to make this work!');
-        return; // Early return if we don't have permission
+        return;
       }
   
       const result = await ImagePicker.launchCameraAsync({
@@ -136,10 +129,9 @@ const Activity = () => {
   
       if (!result.cancelled) {
         setNewPhotoUri(result.assets[0].uri);
-        setModalVisible(true); // Show the modal to enter caption
+        setModalVisible(true); 
       }
     } catch (e) {
-      // Handle any errors here, possibly a UI update to inform the user
       console.error("An error occurred while opening the camera", e);
       alert('An error occurred while trying to take a picture.');
     }
