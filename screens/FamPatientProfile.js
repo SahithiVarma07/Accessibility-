@@ -12,7 +12,7 @@ const FamilyPatientProfile = () => {
     'Wed Apr 17 2024 18:00:00 GMT-0500': [
       {
         id: 1,
-        title: 'Eating Breakfast',
+        title: 'Reading Books',
         time: '9:30 AM - 10:00 AM',
         image: { uri: 'https://images.pexels.com/photos/18429461/pexels-photo-18429461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
@@ -66,9 +66,15 @@ const FamilyPatientProfile = () => {
               <Text style={styles.dateHeader}>{formatDate(date)}</Text>
               {activities.map((activity) => (
                 <TouchableOpacity 
-                  key={activity.id} 
-                  style={styles.activityItem}
-                  onPress={() => navigation.navigate('FamActivity', { activityId: activity.id })}>
+                key={activity.id} 
+                style={styles.activityItem} 
+                onPress={() => navigation.navigate('Activity', {
+                  activityDocumentId: activity.id,
+                  activityTitle: activity.title,
+                  activityTime: activity.time,
+                  activityPhotoUri: activity.photo  // Assuming 'activity.photo' is the URI or require statement for the image
+                })}
+              >
                   {activity.image && (
                     <Image source={activity.image} style={styles.activityImage} />
                   )}

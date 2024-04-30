@@ -20,9 +20,9 @@ const PatientProfile = () => {
     'Wed Apr 17 2024 18:00:00 GMT-0500': [
       {
         id: 1,
-        title: 'Eating Breakfast',
+        title: 'Reading Books',
         time: '9:30 AM - 10:00 AM',
-        image: { uri: 'https://images.pexels.com/photos/18429461/pexels-photo-18429461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
+        image: { uri: 'https://neighborsdc.org/wp-content/uploads/2019/04/the-neighbors-of-dunn-county-senior-reading-1024x585.png'},
       },
       {
         id: 2,
