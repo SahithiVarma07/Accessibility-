@@ -12,15 +12,15 @@ const FamilyPatientProfile = () => {
     'Wed Apr 17 2024 18:00:00 GMT-0500': [
       {
         id: 1,
-        title: 'Reading Books',
+        title: 'Eating Breakfast',
         time: '9:30 AM - 10:00 AM',
-        image: require('../assets/breakfast.jpg'),
+        image: { uri: 'https://images.pexels.com/photos/18429461/pexels-photo-18429461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
       {
         id: 2,
         title: 'Martha\'s Birthday Party',
         time: '1:00 PM - 3:00 PM',
-        image: require('../assets/bday.jpg'),
+        image: { uri: 'https://images.pexels.com/photos/18459203/pexels-photo-18459203/free-photo-of-caregiver-serving-food-for-elderly-people-in-retirement-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
       {
         id: 3,
@@ -32,8 +32,15 @@ const FamilyPatientProfile = () => {
     'Tue Apr 16 2024 18:00:00 GMT-0500': [
       {
         id: 4,
-        title: 'Doctor\'s Appointment',
-        time: '2:00 PM - 3:00 PM',
+        title: 'Eating Breakfast',
+        time: '0:00 PM - 0:00 PM',
+        image: { uri: 'https://images.pexels.com/photos/18429461/pexels-photo-18429461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
+      },
+      {
+        id: 5,
+        title: 'An\'s Birthday Party',
+        time: '0:00 PM - 0:00 PM',
+        image: { uri: 'https://images.pexels.com/photos/18459203/pexels-photo-18459203/free-photo-of-caregiver-serving-food-for-elderly-people-in-retirement-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'},
       },
     ],
   };
