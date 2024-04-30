@@ -17,6 +17,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { db } from '../Firebase';
 import { collection, deleteDoc, doc, getDocs, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
+import { ref, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'; // Correct imports for storage
+
 
 const Post = ({ id, photo, caption, onDelete }) => {
   const swipeableRef = useRef(null);
@@ -88,13 +90,27 @@ const Activity = () => {
   };
 
   const handleAddPost = async () => {
+    const storage = getStorage(); // Get a reference to the storage service
+    const response = await fetch(newPhotoUri);
+    const blob = await response.blob();
+    
+    // Create a reference to the storage at a specific path with a unique timestamp
+    const imageRef = ref(storage, `posts/${Date.now()}`);
+    
+    // Upload the image blob to Firebase Storage
+    const snapshot = await uploadBytes(imageRef, blob);
+    // Get the download URL of the uploaded file
+    const photoURL = await getDownloadURL(snapshot.ref);
+
+    // Construct the post object with the URL of the uploaded image
     const newPost = {
-      photo: newPhotoUri,
+      photo: photoURL, // Use the URL from the uploaded image
       caption: newCaption,
       timestamp: serverTimestamp(),
     };
   
     try {
+      // Add the new post to the Firestore database
       const docRef = await addDoc(collection(db, "posts"), newPost);
       console.log("Document written with ID: ", docRef.id);
       setPosts(currentPosts => [...currentPosts, { ...newPost, id: docRef.id }]);
