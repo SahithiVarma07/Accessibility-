@@ -1,8 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Modal, TextInput, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  Modal,
+  TextInput,
+  Animated
+} from 'react-native';
 import { SimpleLineIcons, FontAwesome, AntDesign } from '@expo/vector-icons'; 
 import * as ImagePicker from 'expo-image-picker';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { db } from '../Firebase';
 import { collection, deleteDoc, doc, getDocs, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
@@ -47,6 +58,8 @@ const Post = ({ id, photo, caption, onDelete }) => {
 
 const Activity = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { activityId, activityTitle, activityTime, activityPhoto } = route.params;
 
   const [posts, setPosts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -92,7 +105,6 @@ const Activity = () => {
     }
   };
 
-
   const openCamera = async () => {
     try {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -120,7 +132,7 @@ const Activity = () => {
   return (
     <SafeAreaView style={styles.container}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-              <Modal
+        <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
@@ -144,14 +156,16 @@ const Activity = () => {
         </Modal>
 
         <ScrollView contentContainerStyle={styles.activityScrollContainer}>
-
           <View style={styles.titleContainer}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <SimpleLineIcons style={styles.backArrow}  name= "arrow-left" />
+              <SimpleLineIcons style={styles.backArrow} name="arrow-left" />
             </TouchableOpacity>
             <View style={styles.textContainer}>
-              <Text style={styles.activityTitle}>Reading Books</Text>
-              <Text style={styles.activityTime}>Thursday, 4/17 @ 9:00 AM</Text>
+              <Text style={styles.activityTitle}>{activityTitle}</Text>
+              <Text style={styles.activityTime}>{activityTime}</Text>
+              {activityPhoto && (
+                <Image source={{ uri: activityPhoto }} style={styles.photo} />
+              )}
             </View>
           </View>
 

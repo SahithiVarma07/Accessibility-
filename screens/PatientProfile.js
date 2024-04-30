@@ -180,17 +180,23 @@ const PatientProfile = () => {
                 <Text style={styles.dateHeader}>{formatDate(date)}</Text>
                 {activities.map((activity) => (
                   <TouchableOpacity 
-                    key={activity.id} 
-                    style={styles.activityItem} 
-                    onPress={() => navigation.navigate('Activity', { activityId: activity.id })}>
-                    {activity.image && (
-                      <Image source={activity.image} style={styles.activityImage} />
-                    )}
-                    <View style={styles.activityContent}>
-                      <Text style={styles.activityTitle}>{activity.title}</Text>
-                      <Text style={styles.activityTime}>{activity.time}</Text>
-                    </View>
-                  </TouchableOpacity>
+                  key={activity.id} 
+                  style={styles.activityItem} 
+                  onPress={() => navigation.navigate('Activity', {
+                    activityDocumentId: activity.id,
+                    activityTitle: activity.title,
+                    activityTime: activity.time,
+                    activityPhotoUri: activity.photo  // Assuming 'activity.photo' is the URI or require statement for the image
+                  })}
+                >
+                  {activity.image && (
+                    <Image source={activity.image} style={styles.activityImage} />
+                  )}
+                  <View style={styles.activityContent}>
+                    <Text style={styles.activityTitle}>{activity.title}</Text>
+                    <Text style={styles.activityTime}>{activity.time}</Text>
+                  </View>
+                </TouchableOpacity>
                 ))}
               </View>
             ))}
