@@ -14,13 +14,13 @@ const FamilyPatientProfile = () => {
         id: 1,
         title: 'Reading Books',
         time: '9:30 AM - 10:00 AM',
-        image: require('../assets/breakfast.png'),
+        image: require('../assets/breakfast.jpg'),
       },
       {
         id: 2,
         title: 'Martha\'s Birthday Party',
         time: '1:00 PM - 3:00 PM',
-        image: require('../assets/bday.png'),
+        image: require('../assets/bday.jpg'),
       },
       {
         id: 3,

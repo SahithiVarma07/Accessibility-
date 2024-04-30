@@ -18,7 +18,7 @@ const AccountSettings = ( ) => {
           <ScrollView contentContainerStyle={styles.scrollableContent}>
             <View style={styles.profileContainer}>
               <Image 
-                source={require('../assets/nurse-profile.png')} 
+                source={{ uri: 'https://www.shutterstock.com/image-photo/portrait-beautiful-40yearold-blond-woman-600nw-720054574.jpg'}} 
                 style={styles.profileImage}
               />
               <Text style={styles.profileName}>Ella</Text>
